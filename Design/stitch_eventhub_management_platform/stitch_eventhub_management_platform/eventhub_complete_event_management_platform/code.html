@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventHub - Event Management Platform</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration matching the brand tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#eaedff",
+            "surface-tint": "#4d44e3",
+            "surface-variant": "#dae2fd",
+            "secondary-fixed": "#eaddff",
+            "on-surface": "#131b2e",
+            "error-container": "#ffdad6",
+            "on-primary-container": "#dad7ff",
+            "surface-container-high": "#e2e7ff",
+            "outline-variant": "#c7c4d8",
+            "tertiary-fixed": "#ffdbce",
+            "on-secondary-fixed-variant": "#5a00c6",
+            "tertiary-container": "#aa3b00",
+            "inverse-on-surface": "#eef0ff",
+            "surface": "#faf8ff",
+            "outline": "#777587",
+            "background": "#faf8ff",
+            "inverse-primary": "#c3c0ff",
+            "surface-bright": "#faf8ff",
+            "primary-fixed": "#e2dfff",
+            "tertiary": "#822c00",
+            "on-tertiary-fixed-variant": "#7f2b00",
+            "on-secondary-fixed": "#25005a",
+            "secondary-container": "#8a4cfc",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#3323cc",
+            "tertiary-fixed-dim": "#ffb599",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary-container": "#4f46e5",
+            "on-tertiary-fixed": "#370e00",
+            "inverse-surface": "#283044",
+            "on-tertiary-container": "#ffd1c1",
+            "on-background": "#131b2e",
+            "surface-container-highest": "#dae2fd",
+            "secondary-fixed-dim": "#d2bbff",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-error": "#ffffff",
+            "surface-dim": "#d2d9f4",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "surface-container-low": "#f2f3ff",
+            "on-surface-variant": "#464555",
+            "on-primary-fixed": "#0f0069",
+            "error": "#ba1a1a",
+            "primary": "#3525cd",
+            "on-secondary": "#ffffff",
+            "secondary": "#712ae2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "2rem",
+            "gutter-sm": "1rem",
+            "gutter-lg": "2rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "margin-tablet": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "mono-metric": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-lg": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-xl-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "mono-metric": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "800" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c7c4d8;
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col selection:bg-surface-container-high selection:text-primary">
+<!-- ========================================================================= -->
+<!-- TOP APP BAR (From Shared Components JSON)                                -->
+<!-- ========================================================================= -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none docked full-width top-0 sticky z-40">
+<div class="w-full max-w-[1440px] mx-auto px-margin flex items-center justify-between h-16">
+<!-- Brand & Left Section -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-2 group" href="javascript:void(0)" onclick="app.navigate('explore')">
+<div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-inverse-primary">EventHub</span>
+</a>
+<!-- Global Search Bar (From search_bar: 'on_left') -->
+<div class="hidden lg:flex items-center relative w-64">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-3 text-body-sm bg-surface-container-low rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all placeholder:text-outline" id="navGlobalSearch" oninput="app.handleSearch(this.value)" placeholder="Search events, topics, or venues..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links Cluster -->
+<nav class="hidden md:flex items-center space-x-6 h-full" id="topNavLinks">
+<!-- Injected via JavaScript based on current active tab & permissions -->
+</nav>
+<!-- Trailing Action Cluster & Profile Switcher -->
+<div class="flex items-center gap-3">
+<!-- Quick Action Trigger (Trailing Primary Action: Create Event or Explore) -->
+<div id="navPrimaryActionSlot"></div>
+<!-- Trailing Icon Actions: notifications, help_outline -->
+<div class="flex items-center text-on-surface-variant">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors relative" onclick="app.showToast('You have 2 upcoming event reminders for this weekend', 'info')" title="Notifications">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors" onclick="app.openApiContractModal()" title="API Contract & Architecture Schema">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-6 w-px bg-outline-variant"></div>
+<!-- Trailing Secondary Action: Demo Profile Switcher Dropdown -->
+<div class="relative">
+<button class="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-all active:scale-[0.98] shadow-sm" id="profileSwitcherBtn" onclick="app.toggleProfileDropdown()">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary font-bold text-[11px] flex items-center justify-center shadow-inner" id="currentUserAvatar">
+              AB
+            </div>
+<div class="text-left hidden sm:block">
+<div class="font-label-md text-label-md text-on-surface font-semibold leading-tight" id="currentUserName">Abhay</div>
+<div class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider" id="currentUserRoleBadge">STUDENT</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]" data-icon="expand_more">expand_more</span>
+</button>
+<!-- Switcher Dropdown Menu -->
+<div class="hidden absolute right-0 mt-2 w-64 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-xl z-50 py-2" id="profileDropdown">
+<div class="px-3.5 py-2 border-b border-outline-variant/60">
+<p class="font-label-sm text-[11px] font-bold text-outline uppercase tracking-wider">Demo Switcher (REST Persona)</p>
+<p class="font-body-sm text-[11px] text-on-surface-variant">Switch role to test live API permission scopes</p>
+</div>
+<div class="py-1" id="profileListItems">
+<!-- Dynamically populated profiles -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN APP CONTAINER                                                        -->
+<!-- ========================================================================= -->
+<main class="flex-1 w-full max-w-[1440px] mx-auto px-margin py-8">
+<!-- API CONTRACT NOTICE / STATUS BANNER (From user's prompt schema) -->
+<div class="mb-6 p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-body-sm shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock">lock</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface">REST Architecture State:</span>
+<span class="text-on-surface-variant ml-1" id="bannerAuthNote">Authenticated as <strong>Abhay</strong> (Student). Public discovery enabled; organizer private routes locked.</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-label-md">
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-semibold flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Live Client State
+        </span>
+<button class="text-primary hover:underline font-semibold flex items-center gap-0.5" onclick="app.openApiContractModal()">
+          API Contract <span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- ======================================================================= -->
+<!-- VIEW A: EXPLORE EVENTS (STUDENT HOME)                                   -->
+<!-- ======================================================================= -->
+<section class="space-y-8" id="viewExplore">
+<!-- Hero Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary to-secondary p-8 sm:p-12 text-on-primary shadow-md">
+<div class="absolute -right-16 -top-24 w-80 h-80 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-2xl space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white text-label-sm font-semibold tracking-wide backdrop-blur-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="bolt">bolt</span>
+            FALL 2025 SEMESTER SCHEDULE LIVE
+          </div>
+<h1 class="font-headline-xl text-headline-xl font-bold tracking-tight">Discover Events That Inspire You</h1>
+<p class="font-body-lg text-white/90">
+            Join thousands of students and builders. Explore cutting-edge developer summits, cybersecurity bootcamps, hands-on workshops, and tech networking sessions.
+          </p>
+<div class="pt-2 flex flex-wrap gap-3 items-center">
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest text-primary font-label-lg font-semibold hover:bg-surface-container-low transition-all shadow-sm" onclick="app.filterCategory('All')">
+              Browse All Events
+            </button>
+<button class="px-4 py-2 rounded-lg bg-white/20 text-white font-label-lg font-semibold hover:bg-white/30 backdrop-blur-sm transition-all" onclick="app.filterStatus('open')">
+              Fast Selling Only
+            </button>
+</div>
+</div>
+</div>
+<!-- Filter Controls & Category Chips -->
+<div class="space-y-4">
+<!-- Categories Pill Bar -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scroll" id="categoryChipsContainer">
+<!-- Populated by JS -->
+</div>
+<!-- Filter Subbar: Search + Availability Toggles -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-outline-variant/40">
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<span class="font-label-md text-outline font-medium">Filter By:</span>
+<button class="px-3 py-1 text-label-sm rounded-full bg-primary-container text-on-primary font-semibold transition-colors" id="statusBtn-all" onclick="app.filterStatus('all')">
+              All States
+            </button>
+<button class="px-3 py-1 text-label-sm rounded-full bg-surface-container text-on-surface-variant hover:text-primary font-semibold transition-colors" id="statusBtn-open" onclick="app.filterStatus('open')">
+              Open (Available)
+            </button>
+<button class="px-3 py-1 text-label-sm rounded-full bg-surface-container text-on-surface-variant hover:text-primary font-semibold transition-colors" id="statusBtn-almost_full" onclick="app.filterStatus('almost_full')">
+              Almost Full
+            </button>
+</div>
+<div class="text-body-sm text-outline font-medium w-full sm:w-auto text-left sm:text-right" id="eventResultsCounter">
+            Showing 5 active events
+          </div>
+</div>
+</div>
+<!-- Events Bento / Responsive Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="eventsGrid">
+<!-- Event Cards dynamically rendered by app.renderExploreView() -->
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- VIEW C: MY REGISTRATIONS (STUDENT VIEW)                                 -->
+<!-- ======================================================================= -->
+<section class="space-y-8 hidden" id="viewRegistrations">
+<!-- Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">My Registrations</h2>
+<p class="font-body-md text-on-surface-variant">Manage your registered event passes, access tokens, and check-in schedules.</p>
+</div>
+<button class="px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-lg font-semibold inline-flex items-center gap-2 transition-all" onclick="app.navigate('explore')">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+          Register for More Events
+        </button>
+</div>
+<!-- Registration Metric Stat Strip -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<div class="font-label-md text-outline font-medium">Total Registered</div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary mt-1" id="statUserTotalRegs">0</div>
+<div class="font-body-sm text-on-surface-variant mt-0.5">Active passes held</div>
+</div>
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<div class="font-label-md text-outline font-medium">Upcoming Events</div>
+<div class="font-headline-lg text-headline-lg font-bold text-emerald-600 mt-1" id="statUserUpcoming">0</div>
+<div class="font-body-sm text-on-surface-variant mt-0.5">Scheduled on calendar</div>
+</div>
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<div class="font-label-md text-outline font-medium">Completed Events</div>
+<div class="font-headline-lg text-headline-lg font-bold text-slate-700 mt-1">1</div>
+<div class="font-body-sm text-on-surface-variant mt-0.5">Attended previous sessions</div>
+</div>
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<div class="font-label-md text-outline font-medium">Cancelled Passes</div>
+<div class="font-headline-lg text-headline-lg font-bold text-tertiary-container mt-1" id="statUserCancelled">0</div>
+<div class="font-body-sm text-on-surface-variant mt-0.5">Returned to public pool</div>
+</div>
+</div>
+<!-- Filter Sub-tabs -->
+<div class="border-b border-outline-variant flex items-center gap-6">
+<button class="pb-3 text-label-lg font-semibold text-primary border-b-2 border-primary" id="regTab-all" onclick="app.setRegTab('all')">All Registrations</button>
+<button class="pb-3 text-label-lg font-medium text-on-surface-variant hover:text-on-surface" id="regTab-upcoming" onclick="app.setRegTab('upcoming')">Upcoming</button>
+<button class="pb-3 text-label-lg font-medium text-on-surface-variant hover:text-on-surface" id="regTab-confirmed" onclick="app.setRegTab('confirmed')">Confirmed Active</button>
+</div>
+<!-- Registrations Content Container -->
+<div class="space-y-4" id="userRegistrationsList">
+<!-- Rendered by JS -->
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- VIEW D: ORGANIZER DASHBOARD                                             -->
+<!-- ======================================================================= -->
+<section class="space-y-8 hidden" id="viewDashboard">
+<!-- Dashboard Top Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="inline-flex items-center gap-1.5 text-label-sm font-bold text-primary bg-surface-container px-2.5 py-0.5 rounded-full mb-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="admin_panel_settings">admin_panel_settings</span>
+            EXECUTIVE CONTROL CONSOLE
+          </div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Organizer Dashboard</h2>
+<p class="font-body-md text-on-surface-variant">Real-time attendee telemetry, registration throughput, and capacity allocation.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-lg font-semibold shadow-sm hover:bg-primary transition-all flex items-center gap-2" onclick="app.openCreateEventModal()">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+            Create Event
+          </button>
+<button class="px-4 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low text-on-surface font-label-lg font-semibold flex items-center gap-2 transition-all" onclick="app.navigate('manage')">
+<span class="material-symbols-outlined text-[18px]" data-icon="table_chart">table_chart</span>
+            Manage Events
+          </button>
+</div>
+</div>
+<!-- 4 High Impact Metric Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-outline font-semibold">TOTAL EVENTS</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="event">event</span>
+</div>
+</div>
+<div class="font-headline-xl text-headline-xl font-bold text-on-surface mt-2" id="metricTotalEvents">5</div>
+<div class="flex items-center gap-1 text-emerald-600 font-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+<span>+2 added this week</span>
+</div>
+</div>
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-outline font-semibold">ACTIVE EVENTS</span>
+<div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="font-headline-xl text-headline-xl font-bold text-on-surface mt-2" id="metricActiveEvents">4</div>
+<div class="font-body-sm text-on-surface-variant mt-1">Currently open for RSVPs</div>
+</div>
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-outline font-semibold">TOTAL REGISTRATIONS</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="group">group</span>
+</div>
+</div>
+<div class="font-headline-xl text-headline-xl font-bold text-secondary mt-2" id="metricTotalRegs">428</div>
+<div class="flex items-center gap-1 text-emerald-600 font-label-sm mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+<span>92.4% confirmation rate</span>
+</div>
+</div>
+<div class="p-5 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-outline font-semibold">AVAILABLE SEATS</span>
+<div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]" data-icon="event_seat">event_seat</span>
+</div>
+</div>
+<div class="font-headline-xl text-headline-xl font-bold text-amber-600 mt-2" id="metricAvailSeats">172</div>
+<div class="font-body-sm text-on-surface-variant mt-1">Across all planned capacities</div>
+</div>
+</div>
+<!-- Mid Section: Analytics Graph & Live Activity Feed Bento -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Visual Registration Chart Panel (Linear/SaaS aesthetic) -->
+<div class="lg:col-span-2 p-6 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm space-y-5">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Registration Velocity</h3>
+<p class="font-body-sm text-on-surface-variant">Daily student sign-ups across all events over the last 7 days</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-label-sm text-primary font-semibold bg-surface-container px-2.5 py-1 rounded-md">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> POST /api/registrations
+              </span>
+</div>
+</div>
+<!-- Synthetic Modern Bar Chart -->
+<div class="h-56 w-full flex items-end justify-between gap-3 pt-6 pb-2 px-2 border-b border-outline-variant/60">
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">32</span>
+<div class="w-full bg-primary-container/20 group-hover:bg-primary-container rounded-t-lg transition-all" style="height: 35%;"></div>
+<span class="font-label-sm text-[11px] text-outline">Mon</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">48</span>
+<div class="w-full bg-primary-container/30 group-hover:bg-primary-container rounded-t-lg transition-all" style="height: 50%;"></div>
+<span class="font-label-sm text-[11px] text-outline">Tue</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">64</span>
+<div class="w-full bg-primary-container/50 group-hover:bg-primary-container rounded-t-lg transition-all" style="height: 65%;"></div>
+<span class="font-label-sm text-[11px] text-outline">Wed</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">82</span>
+<div class="w-full bg-primary-container/70 group-hover:bg-primary-container rounded-t-lg transition-all" style="height: 80%;"></div>
+<span class="font-label-sm text-[11px] text-outline">Thu</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">110</span>
+<div class="w-full bg-primary-container group-hover:bg-secondary rounded-t-lg transition-all" style="height: 95%;"></div>
+<span class="font-label-sm text-[11px] text-primary font-bold">Fri (Peak)</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">52</span>
+<div class="w-full bg-primary-container/40 group-hover:bg-primary-container rounded-t-lg transition-all" style="height: 55%;"></div>
+<span class="font-label-sm text-[11px] text-outline">Sat</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+<span class="text-[11px] font-mono font-medium text-outline opacity-0 group-hover:opacity-100 transition-opacity">40</span>
+<div class="w-full bg-primary-container/30 group-hover:bg-primary-container rounded-t-lg transition-all" style="height: 42%;"></div>
+<span class="font-label-sm text-[11px] text-outline">Sun</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-outline">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-primary-container"></span>
+<span>Active Registrations</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-sm bg-outline-variant"></span>
+<span>Waitlist Buffer</span>
+</div>
+</div>
+<span class="font-mono text-[12px]">Updated 2 mins ago</span>
+</div>
+</div>
+<!-- Live Activity Log (Linear style) -->
+<div class="p-6 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Live Event Audit Feed</h3>
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+<p class="font-body-sm text-on-surface-variant">Real-time webhook events from registration ledger</p>
+<div class="space-y-3.5 pt-2 text-body-sm max-h-72 overflow-y-auto custom-scroll pr-1" id="dashboardLiveFeed">
+<!-- Populated via JS -->
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- VIEW E: MANAGE EVENTS & ATTENDEES (ORGANIZER VIEW)                     -->
+<!-- ======================================================================= -->
+<section class="space-y-6 hidden" id="viewManage">
+<!-- Top Action Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Manage Events</h2>
+<p class="font-body-md text-on-surface-variant">Create, edit, toggle capacities, and inspect authorized attendee rosters.</p>
+</div>
+<button class="px-4 py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg font-semibold shadow-sm hover:bg-primary flex items-center gap-2 transition-all" onclick="app.openCreateEventModal()">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+          Create New Event
+        </button>
+</div>
+<!-- Controls Strip: Search + Filter -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3 w-full md:w-auto">
+<div class="relative w-full md:w-80">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-10 pl-9 pr-3 text-body-sm rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" oninput="app.filterManageSearch(this.value)" placeholder="Search managed events..." type="text"/>
+</div>
+<select class="h-10 px-3 text-body-sm rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:border-primary-container" onchange="app.filterManageCategory(this.value)">
+<option value="All">All Categories</option>
+<option value="Technology">Technology</option>
+<option value="Cybersecurity">Cybersecurity</option>
+<option value="AI & Machine Learning">AI & Machine Learning</option>
+<option value="Hackathons">Hackathons</option>
+<option value="Career Development">Career Development</option>
+</select>
+</div>
+<div class="flex items-center gap-3 text-body-sm text-on-surface-variant w-full md:w-auto justify-end">
+<span id="manageEventCountLabel">5 Events in system</span>
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant hover:bg-surface-container-low font-label-md text-on-surface flex items-center gap-1.5 transition-colors" onclick="app.exportAllEventsCSV()">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+            Export All
+          </button>
+</div>
+</div>
+<!-- Events Management Table (High-Density Linear Style) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant font-label-md text-[11px] text-outline uppercase tracking-wider">
+<th class="py-3 px-4 font-semibold">Event Title & Category</th>
+<th class="py-3 px-4 font-semibold">Date & Time</th>
+<th class="py-3 px-4 font-semibold">Capacity Fill</th>
+<th class="py-3 px-4 font-semibold">Available Seats</th>
+<th class="py-3 px-4 font-semibold">Status</th>
+<th class="py-3 px-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50 text-body-sm" id="manageEventsTableBody">
+<!-- Dynamically populated rows -->
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- MODAL A: EVENT DETAILS MODAL / DRAWER                                     -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4" id="eventDetailsModal">
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-2xl max-w-2xl w-full max-h-[921px] overflow-y-auto custom-scroll relative">
+<div class="sticky top-0 z-10 bg-surface-container-lowest/90 backdrop-blur-md px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-surface-container text-primary" id="modalEventCategoryBadge">Category</span>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-emerald-100 text-emerald-800" id="modalEventStatusBadge">Status</span>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-outline flex items-center justify-center transition-colors" onclick="app.closeModal('eventDetailsModal')">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6">
+<div class="h-56 rounded-xl overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="High quality vibrant tech conference banner with modern stage lighting, purple neon accents, and professional developer audience" id="modalEventBanner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnOIPP8jPKozm19MTNRWoS3s92-rNcl20Ji5p80Yel244sbAPZLfVM-gb4qIFBRg8KSaAKKTUbhtAv9EoXBeLv3jkJJ8NThO5a-B8TQyJaGyATtma-cr3q6GZSGEZ9Yl5N2ARAgv1Fm16rJwUsU9IhxyAGQM_grXRptmQVNZ1lGV7BEKsnVejqT7nLAtS_ur-lpNaZl8nJBuu6iYv56hm-R1EOhWoGNBA384knMzay"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h2 class="text-white font-headline-lg text-headline-lg font-bold" id="modalEventTitle">Event Title</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant">
+<div>
+<div class="font-label-sm text-outline">Date & Time</div>
+<div class="font-label-md font-semibold text-on-surface mt-0.5" id="modalEventDateTime">Oct 24, 2025 • 09:00 AM</div>
+</div>
+<div>
+<div class="font-label-sm text-outline">Venue / Location</div>
+<div class="font-label-md font-semibold text-on-surface mt-0.5" id="modalEventVenue">Hall A, Innovation Campus</div>
+</div>
+<div>
+<div class="font-label-sm text-outline">Owning Organizer</div>
+<div class="font-label-md font-semibold text-primary mt-0.5" id="modalEventOrganizer">Admin Organizer</div>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface">About the Event</h4>
+<p class="font-body-md text-on-surface-variant leading-relaxed" id="modalEventDescription">Detailed event description text.</p>
+</div>
+<!-- Real-time Capacity Breakdown -->
+<div class="p-4 rounded-xl bg-surface-container/60 border border-outline-variant/80 space-y-2">
+<div class="flex justify-between items-center text-body-sm">
+<span class="font-semibold text-on-surface">Seat Allocation Status</span>
+<span class="font-mono text-[12px] font-bold text-primary" id="modalEventSeatNumbers">142 / 150 Seats Taken</span>
+</div>
+<div class="w-full bg-outline-variant/40 rounded-full h-2.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" id="modalEventProgressBar" style="width: 85%;"></div>
+</div>
+<div class="flex justify-between text-body-sm text-outline text-[11px]">
+<span id="modalEventSeatRemaining">8 Seats remaining</span>
+<span>REST API: GET /api/events/{id}</span>
+</div>
+</div>
+<!-- Agenda Schedule -->
+<div class="space-y-3">
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface">Keynote & Agenda</h4>
+<div class="space-y-2 text-body-sm">
+<div class="flex gap-4 p-3 rounded-lg border border-outline-variant/60">
+<span class="font-mono font-semibold text-primary w-24">09:00 - 10:00</span>
+<div>
+<div class="font-semibold text-on-surface">Registration & Welcome Keynote</div>
+<div class="text-on-surface-variant">Badge pickup and platform architecture overview</div>
+</div>
+</div>
+<div class="flex gap-4 p-3 rounded-lg border border-outline-variant/60">
+<span class="font-mono font-semibold text-primary w-24">10:15 - 12:30</span>
+<div>
+<div class="font-semibold text-on-surface">Hands-on Technical Deep Dive</div>
+<div class="text-on-surface-variant">Live coding demonstrations and interactive Q&A</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action CTA -->
+<div class="pt-4 border-t border-outline-variant flex items-center justify-between gap-4">
+<div class="text-body-sm text-outline">
+            Instant registration confirmation via client ledger.
+          </div>
+<div id="modalActionSlot">
+<!-- Dynamic button -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL B: ATTENDEE MANAGEMENT DRAWER (OWNING ORGANIZER RESTRICTED)          -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4" id="attendeeDrawerModal">
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-2xl max-w-3xl w-full max-h-[921px] overflow-y-auto custom-scroll relative">
+<div class="sticky top-0 z-10 bg-surface-container-lowest/90 backdrop-blur-md px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface" id="drawerEventTitle">Event Attendees</h3>
+<p class="font-body-sm text-outline">Endpoint: GET /api/events/{id}/registrations (Owning organizer only)</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-outline flex items-center justify-center transition-colors" onclick="app.closeModal('attendeeDrawerModal')">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6">
+<!-- Event Quick Stats Banner -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-surface-container-low border border-outline-variant">
+<div>
+<div class="font-label-sm text-outline">Total Confirmed</div>
+<div class="font-headline-sm font-bold text-primary mt-0.5" id="drawerTotalAttendees">0</div>
+</div>
+<div>
+<div class="font-label-sm text-outline">Capacity Remaining</div>
+<div class="font-headline-sm font-bold text-amber-600 mt-0.5" id="drawerRemainingCapacity">0</div>
+</div>
+<div>
+<div class="font-label-sm text-outline">Owning Organizer</div>
+<div class="font-headline-sm font-bold text-on-surface mt-0.5" id="drawerOwnerName">-</div>
+</div>
+</div>
+<!-- Filter + CSV Export -->
+<div class="flex items-center justify-between gap-4">
+<div class="relative flex-1 max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-3 text-body-sm rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" oninput="app.filterAttendeeRoster(this.value)" placeholder="Search registered attendees..." type="text"/>
+</div>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md font-semibold flex items-center gap-1.5 transition-colors" onclick="app.exportEventAttendeesCSV()">
+<span class="material-symbols-outlined text-[16px]" data-icon="file_download">file_download</span>
+            Export CSV
+          </button>
+</div>
+<!-- Attendee Table -->
+<div class="rounded-xl border border-outline-variant overflow-hidden">
+<table class="w-full text-left border-collapse text-body-sm">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant font-label-md text-[11px] text-outline uppercase tracking-wider">
+<th class="py-2.5 px-4">Attendee Name</th>
+<th class="py-2.5 px-4">Email</th>
+<th class="py-2.5 px-4">Registration Date</th>
+<th class="py-2.5 px-4">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60" id="drawerAttendeeTableBody">
+<!-- Rendered dynamically -->
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL C: CREATE / EDIT EVENT MODAL                                       -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4" id="createEventModal">
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-2xl max-w-xl w-full max-h-[921px] overflow-y-auto custom-scroll relative">
+<div class="sticky top-0 z-10 bg-surface-container-lowest/90 backdrop-blur-md px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface" id="eventFormModalTitle">Create New Event</h3>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-outline flex items-center justify-center transition-colors" onclick="app.closeModal('createEventModal')">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<form class="p-6 space-y-4" id="createEventForm" onsubmit="app.handleSaveEvent(event)">
+<input id="formEventId" type="hidden" value=""/>
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Event Title *</label>
+<input class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20" id="formTitle" placeholder="e.g. NextGen AI Summit 2025" required="" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Category *</label>
+<select class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant bg-surface-container-lowest focus:outline-none focus:border-primary-container" id="formCategory" required="">
+<option value="Technology">Technology</option>
+<option value="Cybersecurity">Cybersecurity</option>
+<option value="AI & Machine Learning">AI & Machine Learning</option>
+<option value="Workshops">Workshops</option>
+<option value="Hackathons">Hackathons</option>
+<option value="Seminars">Seminars</option>
+<option value="Career Development">Career Development</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Maximum Capacity *</label>
+<input class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" id="formCapacity" max="1000" min="1" required="" type="number" value="100"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Event Date *</label>
+<input class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" id="formDate" required="" type="date"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Time Schedule *</label>
+<input class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" id="formTime" placeholder="09:00 AM - 04:00 PM" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Venue / Online Link *</label>
+<input class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" id="formVenue" placeholder="Auditorium 3 / Zoom Webinar" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Banner Visual URL</label>
+<input class="w-full h-10 px-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" id="formBannerUrl" placeholder="placeholder" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface font-semibold mb-1">Description *</label>
+<textarea class="w-full p-3 text-body-md rounded-lg border border-outline-variant focus:outline-none focus:border-primary-container" id="formDescription" placeholder="Provide a compelling overview of agenda, prerequisites, and learning outcomes..." required="" rows="3"></textarea>
+</div>
+<div class="pt-4 border-t border-outline-variant flex items-center justify-end gap-3">
+<button class="px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-lg hover:bg-surface-container-low transition-colors" onclick="app.closeModal('createEventModal')" type="button">Cancel</button>
+<button class="px-5 py-2 rounded-lg bg-primary-container text-on-primary font-label-lg font-semibold shadow-sm hover:bg-primary transition-all" type="submit">Save Event</button>
+</div>
+</form>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL D: API CONTRACT SPECIFICATION & REST ARCHITECTURE VIEWER           -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4" id="apiContractModal">
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-2xl max-w-3xl w-full max-h-[921px] overflow-y-auto custom-scroll relative">
+<div class="sticky top-0 z-10 bg-surface-container-lowest/95 backdrop-blur-md px-6 py-4 border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-2.5 h-6 rounded-full bg-primary-container"></span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">REST API Contract & Schema Architecture</h3>
+</div>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-outline flex items-center justify-center transition-colors" onclick="app.closeModal('apiContractModal')">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6">
+<!-- API Contract Table matching user's image specification -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<h4 class="font-headline-sm text-[16px] font-bold text-on-surface">Defined REST Endpoints</h4>
+<span class="px-2.5 py-0.5 rounded-full text-label-sm font-semibold bg-surface-container text-primary">v1.0 Specifications</span>
+</div>
+<div class="rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse text-body-sm">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant font-label-md text-on-surface">
+<th class="py-2.5 px-4 font-bold w-24">Method</th>
+<th class="py-2.5 px-4 font-bold">Endpoint</th>
+<th class="py-2.5 px-4 font-bold">Description</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60 font-mono text-[13px]">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-4 font-bold text-primary">GET</td>
+<td class="py-3 px-4 text-amber-700 font-semibold">/api/events</td>
+<td class="py-3 px-4 font-sans text-on-surface-variant">Browse events.</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-4 font-bold text-primary">GET</td>
+<td class="py-3 px-4 text-amber-700 font-semibold">/api/events/{id}</td>
+<td class="py-3 px-4 font-sans text-on-surface-variant">Event details.</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-4 font-bold text-secondary">POST</td>
+<td class="py-3 px-4 text-amber-700 font-semibold">/api/registrations</td>
+<td class="py-3 px-4 font-sans text-on-surface-variant">Create registration, 201 or 409.</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-4 font-bold text-primary">GET</td>
+<td class="py-3 px-4 text-amber-700 font-semibold">/api/me/registrations</td>
+<td class="py-3 px-4 font-sans text-on-surface-variant">Current user's registrations.</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-4 font-bold text-primary">GET</td>
+<td class="py-3 px-4 text-amber-700 font-semibold">/api/events/{id}/registrations</td>
+<td class="py-3 px-4 font-sans text-on-surface-variant">Attendee list, owning organizer only.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-600 text-[24px]" data-icon="lock">lock</span>
+<div class="font-body-md text-amber-900 font-medium">
+              Authentication required for registration and private lists. (Handled seamlessly in client session state without login screens).
+            </div>
+</div>
+</div>
+<!-- Database Schema Diagram representation from prompt image -->
+<div class="space-y-3">
+<h4 class="font-headline-sm text-[16px] font-bold text-on-surface">PostgreSQL Entity Relational Blueprint</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-[12px]">
+<!-- Users Schema Table -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm space-y-2">
+<div class="flex items-center gap-1.5 font-bold text-on-surface border-b pb-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="table_view">table_view</span>
+<span>users</span>
+</div>
+<div class="space-y-1 text-on-surface-variant">
+<div class="flex justify-between font-semibold text-primary"><span>🔑 id</span><span>uuid</span></div>
+<div class="flex justify-between"><span>email</span><span>text</span></div>
+<div class="flex justify-between"><span>role</span><span>text</span></div>
+</div>
+</div>
+<!-- Events Schema Table -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm space-y-2">
+<div class="flex items-center gap-1.5 font-bold text-on-surface border-b pb-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="table_view">table_view</span>
+<span>events</span>
+</div>
+<div class="space-y-1 text-on-surface-variant">
+<div class="flex justify-between font-semibold text-primary"><span>🔑 id</span><span>uuid</span></div>
+<div class="flex justify-between text-secondary"><span>🔗 organizer_id</span><span>uuid</span></div>
+<div class="flex justify-between"><span>title</span><span>text</span></div>
+<div class="flex justify-between"><span>capacity</span><span>int8</span></div>
+<div class="flex justify-between"><span>status</span><span>text</span></div>
+</div>
+</div>
+<!-- Registrations Schema Table -->
+<div class="p-3.5 rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm space-y-2">
+<div class="flex items-center gap-1.5 font-bold text-on-surface border-b pb-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="table_view">table_view</span>
+<span>registrations</span>
+</div>
+<div class="space-y-1 text-on-surface-variant">
+<div class="flex justify-between font-semibold text-primary"><span>🔑 id</span><span>uuid</span></div>
+<div class="flex justify-between text-secondary"><span>🔗 user_id</span><span>uuid</span></div>
+<div class="flex justify-between text-secondary"><span>🔗 event_id</span><span>uuid</span></div>
+<div class="flex justify-between"><span>created_at</span><span>timestamptz</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- TOAST NOTIFICATION STACK                                                  -->
+<!-- ========================================================================= -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none" id="toastContainer"></div>
+<!-- ========================================================================= -->
+<!-- FOOTER (From Shared Components JSON)                                      -->
+<!-- ========================================================================= -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline mt-auto">
+<div class="w-full max-w-[1440px] mx-auto px-margin py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-md bg-primary-container text-on-primary flex items-center justify-center text-xs font-bold">
+          EH
+        </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">
+          © 2025 EventHub Management System. All rights reserved. Powered by REST API Architecture.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="javascript:void(0)" onclick="app.openApiContractModal()">API Documentation</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="javascript:void(0)" onclick="app.showToast('Privacy Policy: Strict data privacy under educational compliance.', 'info')">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="javascript:void(0)" onclick="app.showToast('Terms of Service: Authorized institutional usage only.', 'info')">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors flex items-center gap-1.5" href="javascript:void(0)" onclick="app.showToast('System Status: 100% Operational, Latency 14ms', 'success')">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          System Status
+        </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="javascript:void(0)" onclick="app.showToast('Support desk is available 24/7 at support@eventhub.internal', 'info')">Organizer Support</a>
+</div>
+</div>
+</footer>
+<!-- ========================================================================= -->
+<!-- APPLICATION JAVASCRIPT STATE ENGINE                                       -->
+<!-- ========================================================================= -->
+<script>
+    /**
+     * EventHub Application Logic
+     * Complies with user schema, REST contracts, and role-based permissions
+     */
+    const app = {
+      // PRE-POPULATED USERS MATCHING SCHEMA
+      users: [
+        { id: "u1", name: "Abhay", email: "abhay@student.edu", role: "student", initials: "AB" },
+        { id: "u2", name: "Rahul", email: "rahul@student.edu", role: "student", initials: "RH" },
+        { id: "u3", name: "Priya", email: "priya@student.edu", role: "student", initials: "PR" },
+        { id: "u4", name: "Admin Organizer", email: "admin@eventhub.org", role: "organizer", initials: "AO" },
+        { id: "u5", name: "Event Manager", email: "manager@eventhub.org", role: "organizer", initials: "EM" }
+      ],
+
+      // PRE-POPULATED EVENTS
+      events: [
+        {
+          id: "e1",
+          organizer_id: "u4",
+          title: "National Cybersecurity Summit 2025",
+          category: "Cybersecurity",
+          capacity: 150,
+          date: "2025-10-24",
+          time: "09:00 AM - 05:00 PM",
+          venue: "Science Hall Auditorium & Online",
+          status: "open",
+          description: "Explore zero-trust architecture, threat surface intelligence, and quantum encryption defenses with national intelligence officers and industry CISOs.",
+          registeredCount: 142
+        },
+        {
+          id: "e2",
+          organizer_id: "u4",
+          title: "Generative AI & LLM Systems Bootcamp",
+          category: "AI & Machine Learning",
+          capacity: 80,
+          date: "2025-11-04",
+          time: "10:00 AM - 04:30 PM",
+          venue: "Engineering Lab 402",
+          status: "open",
+          description: "A deep dive into Retrieval-Augmented Generation (RAG), parameter-efficient fine-tuning (LoRA), and production deployment of agentic autonomous frameworks.",
+          registeredCount: 78
+        },
+        {
+          id: "e3",
+          organizer_id: "u5",
+          title: "Full-Stack Hackathon 2025: 48-Hour Sprint",
+          category: "Hackathons",
+          capacity: 200,
+          date: "2025-11-15",
+          time: "06:00 PM Friday - 06:00 PM Sunday",
+          venue: "Student Innovation Incubator Center",
+          status: "open",
+          description: "Build cutting-edge full-stack web and mobile applications. Mentorship from Silicon Valley engineers with over $25,000 in student bounties.",
+          registeredCount: 130
+        },
+        {
+          id: "e4",
+          organizer_id: "u5",
+          title: "Cloud Native Architecture & Kubernetes",
+          category: "Technology",
+          capacity: 90,
+          date: "2025-11-20",
+          time: "01:00 PM - 05:00 PM",
+          venue: "Virtual Lab Studio 2",
+          status: "open",
+          description: "Hands-on container orchestration, service meshes with Istio, multi-cloud ingress controllers, and automated GitOps CI/CD pipelines.",
+          registeredCount: 45
+        },
+        {
+          id: "e5",
+          organizer_id: "u4",
+          title: "Tech Career & Internship Expo 2025",
+          category: "Career Development",
+          capacity: 300,
+          date: "2025-12-01",
+          time: "10:00 AM - 03:00 PM",
+          venue: "Grand Campus Exhibition Arena",
+          status: "open",
+          description: "Meet talent acquisition leaders from leading fintech, cloud, AI, and defense engineering organizations. Bring your resume and developer portfolios.",
+          registeredCount: 33
+        }
+      ],
+
+      // PRE-POPULATED REGISTRATIONS LINKING USERS TO EVENTS
+      registrations: [
+        { id: "r1", user_id: "u1", event_id: "e1", created_at: "2025-10-01T10:14:00Z", status: "confirmed" },
+        { id: "r2", user_id: "u1", event_id: "e2", created_at: "2025-10-03T14:22:00Z", status: "confirmed" },
+        { id: "r3", user_id: "u2", event_id: "e1", created_at: "2025-10-02T11:05:00Z", status: "confirmed" },
+        { id: "r4", user_id: "u2", event_id: "e3", created_at: "2025-10-04T09:30:00Z", status: "confirmed" },
+        { id: "r5", user_id: "u3", event_id: "e2", created_at: "2025-10-05T16:45:00Z", status: "confirmed" },
+        { id: "r6", user_id: "u3", event_id: "e4", created_at: "2025-10-06T12:10:00Z", status: "confirmed" }
+      ],
+
+      // STATE
+      currentUser: null,
+      currentView: "explore", // 'explore' | 'registrations' | 'dashboard' | 'manage'
+      selectedCategory: "All",
+      selectedStatusFilter: "all",
+      searchQuery: "",
+      manageSearchQuery: "",
+      manageCategoryFilter: "All",
+      currentInspectionEventId: null,
+
+      init() {
+        // Load initial state or default to Abhay (Student)
+        const savedUserId = sessionStorage.getItem("eventhub_user_id") || "u1";
+        this.currentUser = this.users.find(u => u.id === savedUserId) || this.users[0];
+
+        this.renderUserProfileHeader();
+        this.renderCategoryChips();
+        this.updateNavLinks();
+        this.navigate(this.currentUser.role === 'organizer' ? 'dashboard' : 'explore');
+
+        // Document click close dropdown
+        document.addEventListener('click', (e) => {
+          const dropdown = document.getElementById('profileDropdown');
+          const btn = document.getElementById('profileSwitcherBtn');
+          if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.add('hidden');
+          }
+        });
+      },
+
+      // SWITCHER LOGIC
+      toggleProfileDropdown() {
+        const dropdown = document.getElementById('profileDropdown');
+        dropdown.classList.toggle('hidden');
+        this.renderProfileDropdownList();
+      },
+
+      renderProfileDropdownList() {
+        const container = document.getElementById('profileListItems');
+        container.innerHTML = this.users.map(u => {
+          const isSelected = u.id === this.currentUser.id;
+          const isOrganizer = u.role === 'organizer';
+          return `
+            <button 
+              onclick="app.switchUser('${u.id}')"
+              class="w-full text-left px-3.5 py-2 hover:bg-surface-container flex items-center justify-between transition-colors ${isSelected ? 'bg-surface-container-low font-semibold' : ''}"
+            >
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full ${isOrganizer ? 'bg-secondary-container text-on-secondary' : 'bg-primary-container text-on-primary'} text-[11px] font-bold flex items-center justify-center">
+                  ${u.initials}
+                </div>
+                <div>
+                  <div class="text-body-sm text-on-surface">${u.name}</div>
+                  <div class="text-[10px] text-outline">${u.email}</div>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${isOrganizer ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'}">
+                ${u.role}
+              </span>
+            </button>
+          `;
+        }).join('');
+      },
+
+      switchUser(userId) {
+        this.currentUser = this.users.find(u => u.id === userId);
+        sessionStorage.setItem("eventhub_user_id", userId);
+        document.getElementById('profileDropdown').classList.add('hidden');
+
+        this.renderUserProfileHeader();
+        this.updateNavLinks();
+
+        // If user changed to organizer, navigate to dashboard if currently on student-only page
+        if (this.currentUser.role === 'organizer') {
+          if (this.currentView === 'registrations') {
+            this.navigate('dashboard');
+          } else {
+            this.navigate(this.currentView);
+          }
+        } else {
+          // If user changed to student, navigate away from organizer-only pages
+          if (this.currentView === 'dashboard' || this.currentView === 'manage') {
+            this.navigate('explore');
+          } else {
+            this.navigate(this.currentView);
+          }
+        }
+
+        this.showToast(`Switched active profile to ${this.currentUser.name} (${this.currentUser.role.toUpperCase()})`, 'info');
+      },
+
+      renderUserProfileHeader() {
+        const u = this.currentUser;
+        document.getElementById('currentUserName').innerText = u.name;
+        document.getElementById('currentUserAvatar').innerText = u.initials;
+        
+        const roleBadge = document.getElementById('currentUserRoleBadge');
+        roleBadge.innerText = u.role.toUpperCase();
+
+        if (u.role === 'organizer') {
+          roleBadge.className = "font-label-sm text-[10px] text-secondary font-bold uppercase tracking-wider";
+          document.getElementById('currentUserAvatar').className = "w-7 h-7 rounded-full bg-secondary-container text-on-secondary font-bold text-[11px] flex items-center justify-center shadow-inner";
+        } else {
+          roleBadge.className = "font-label-sm text-[10px] text-primary font-bold uppercase tracking-wider";
+          document.getElementById('currentUserAvatar').className = "w-7 h-7 rounded-full bg-primary-container text-on-primary font-bold text-[11px] flex items-center justify-center shadow-inner";
+        }
+
+        // Update banner auth note
+        const authNote = document.getElementById('bannerAuthNote');
+        if (u.role === 'organizer') {
+          authNote.innerHTML = `Authenticated as <strong>${u.name}</strong> (Organizer). Full privileged access to GET /api/events/{id}/registrations and mutations.`;
+        } else {
+          authNote.innerHTML = `Authenticated as <strong>${u.name}</strong> (Student). Public discovery enabled; organizer private routes locked.`;
+        }
+
+        // Action button in navbar
+        const actionSlot = document.getElementById('navPrimaryActionSlot');
+        if (u.role === 'organizer') {
+          actionSlot.innerHTML = `
+            <button onclick="app.openCreateEventModal()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-md font-semibold hover:bg-primary transition-all shadow-sm">
+              <span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+              Create Event
+            </button>
+          `;
+        } else {
+          actionSlot.innerHTML = `
+            <button onclick="app.navigate('explore')" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container text-primary font-label-md font-semibold hover:bg-surface-container-high transition-all">
+              <span class="material-symbols-outlined text-[16px]" data-icon="search">search</span>
+              Explore Events
+            </button>
+          `;
+        }
+      },
+
+      updateNavLinks() {
+        const linksContainer = document.getElementById('topNavLinks');
+        // Defined in Shared Components: ["Explore Events", "My Registrations", "Organizer Dashboard", "Manage Events"]
+        const isOrganizer = this.currentUser.role === 'organizer';
+
+        let navHTML = '';
+
+        // Tab: Explore Events (Available to both)
+        navHTML += `
+          <button onclick="app.navigate('explore')" class="${this.currentView === 'explore' ? 'text-primary border-b-2 border-primary font-semibold py-4' : 'text-on-surface-variant font-medium hover:text-on-surface py-4 transition-colors'}">
+            Explore Events
+          </button>
+        `;
+
+        // Tab: My Registrations (Only for student or organizer preview)
+        navHTML += `
+          <button onclick="app.navigate('registrations')" class="${this.currentView === 'registrations' ? 'text-primary border-b-2 border-primary font-semibold py-4' : 'text-on-surface-variant font-medium hover:text-on-surface py-4 transition-colors'}">
+            My Registrations
+          </button>
+        `;
+
+        // Tab: Organizer Dashboard (Visible or privileged)
+        if (isOrganizer) {
+          navHTML += `
+            <button onclick="app.navigate('dashboard')" class="${this.currentView === 'dashboard' ? 'text-primary border-b-2 border-primary font-semibold py-4' : 'text-on-surface-variant font-medium hover:text-on-surface py-4 transition-colors'}">
+              Organizer Dashboard
+            </button>
+            <button onclick="app.navigate('manage')" class="${this.currentView === 'manage' ? 'text-primary border-b-2 border-primary font-semibold py-4' : 'text-on-surface-variant font-medium hover:text-on-surface py-4 transition-colors'}">
+              Manage Events
+            </button>
+          `;
+        }
+
+        linksContainer.innerHTML = navHTML;
+      },
+
+      navigate(viewId) {
+        // Enforce organizer permissions
+        if ((viewId === 'dashboard' || viewId === 'manage') && this.currentUser.role !== 'organizer') {
+          this.showToast("Access Denied: Organizer permissions required (403 Forbidden).", "error");
+          return;
+        }
+
+        this.currentView = viewId;
+        this.updateNavLinks();
+
+        // Hide all views
+        document.getElementById('viewExplore').classList.add('hidden');
+        document.getElementById('viewRegistrations').classList.add('hidden');
+        document.getElementById('viewDashboard').classList.add('hidden');
+        document.getElementById('viewManage').classList.add('hidden');
+
+        if (viewId === 'explore') {
+          document.getElementById('viewExplore').classList.remove('hidden');
+          this.renderExploreView();
+        } else if (viewId === 'registrations') {
+          document.getElementById('viewRegistrations').classList.remove('hidden');
+          this.renderRegistrationsView();
+        } else if (viewId === 'dashboard') {
+          document.getElementById('viewDashboard').classList.remove('hidden');
+          this.renderDashboardView();
+        } else if (viewId === 'manage') {
+          document.getElementById('viewManage').classList.remove('hidden');
+          this.renderManageView();
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+
+      // VIEW A: EXPLORE EVENTS RENDERING
+      renderCategoryChips() {
+        const categories = ["All", "Technology", "Cybersecurity", "AI & Machine Learning", "Workshops", "Hackathons", "Seminars", "Career Development"];
+        const container = document.getElementById('categoryChipsContainer');
+        container.innerHTML = categories.map(cat => {
+          const isActive = this.selectedCategory === cat;
+          return `
+            <button 
+              onclick="app.filterCategory('${cat}')"
+              class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-label-md font-semibold transition-all ${isActive ? 'bg-primary-container text-on-primary shadow-sm' : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container'}"
+            >
+              ${cat}
+            </button>
+          `;
+        }).join('');
+      },
+
+      filterCategory(cat) {
+        this.selectedCategory = cat;
+        this.renderCategoryChips();
+        this.renderExploreView();
+      },
+
+      filterStatus(status) {
+        this.selectedStatusFilter = status;
+        ['all', 'open', 'almost_full'].forEach(s => {
+          const btn = document.getElementById(`statusBtn-${s}`);
+          if (btn) {
+            if (s === status) {
+              btn.className = "px-3 py-1 text-label-sm rounded-full bg-primary-container text-on-primary font-semibold transition-colors";
+            } else {
+              btn.className = "px-3 py-1 text-label-sm rounded-full bg-surface-container text-on-surface-variant hover:text-primary font-semibold transition-colors";
+            }
+          }
+        });
+        this.renderExploreView();
+      },
+
+      handleSearch(query) {
+        this.searchQuery = query.toLowerCase().trim();
+        this.renderExploreView();
+      },
+
+      renderExploreView() {
+        const grid = document.getElementById('eventsGrid');
+        
+        let filtered = this.events.filter(ev => {
+          const matchCat = this.selectedCategory === 'All' || ev.category === this.selectedCategory;
+          const matchSearch = !this.searchQuery || 
+            ev.title.toLowerCase().includes(this.searchQuery) ||
+            ev.venue.toLowerCase().includes(this.searchQuery) ||
+            ev.category.toLowerCase().includes(this.searchQuery);
+          
+          let matchStatus = true;
+          const remaining = ev.capacity - ev.registeredCount;
+          if (this.selectedStatusFilter === 'almost_full') {
+            matchStatus = remaining > 0 && remaining <= 10;
+          } else if (this.selectedStatusFilter === 'open') {
+            matchStatus = remaining > 0;
+          }
+
+          return matchCat && matchSearch && matchStatus;
+        });
+
+        document.getElementById('eventResultsCounter').innerText = `Showing ${filtered.length} active events`;
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full py-16 text-center space-y-3 bg-surface-container-lowest rounded-2xl border border-outline-variant">
+              <span class="material-symbols-outlined text-[48px] text-outline" data-icon="search_off">search_off</span>
+              <h3 class="font-headline-sm font-bold text-on-surface">No Events Match Your Filters</h3>
+              <p class="font-body-md text-on-surface-variant">Try selecting "All" categories or reset your search parameters.</p>
+              <button onclick="app.resetFilters()" class="px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md font-semibold">Reset All Filters</button>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = filtered.map(ev => {
+          const organizer = this.users.find(u => u.id === ev.organizer_id) || { name: "Campus Organizer" };
+          const isUserRegistered = this.registrations.some(r => r.user_id === this.currentUser.id && r.event_id === ev.id && r.status === 'confirmed');
+          const remainingSeats = ev.capacity - ev.registeredCount;
+          const fillPercentage = Math.min(100, Math.round((ev.registeredCount / ev.capacity) * 100));
+
+          // Badges
+          let statusBadge = '';
+          if (remainingSeats <= 0) {
+            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-600">Sold Out</span>`;
+          } else if (remainingSeats <= 10) {
+            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-orange-100 text-orange-700 animate-pulse">Almost Full (${remainingSeats} left)</span>`;
+          } else {
+            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">Open For RSVP</span>`;
+          }
+
+          return `
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant hover:border-primary-container/60 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+              <!-- Card Visual Header -->
+              <div class="h-44 relative overflow-hidden bg-surface-container">
+                <img 
+                  src="placeholder" 
+                  data-alt="Modern technical conference hall in light aesthetics with university students, clean minimalist stage banner, electric indigo accent lighting" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute top-3 left-3 flex items-center gap-2">
+                  <span class="px-2.5 py-1 rounded-full text-label-sm font-semibold bg-surface-container-lowest/90 backdrop-blur-sm text-primary shadow-sm">
+                    ${ev.category}
+                  </span>
+                </div>
+                <div class="absolute top-3 right-3">
+                  ${statusBadge}
+                </div>
+              </div>
+
+              <!-- Content Body -->
+              <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                <div class="space-y-2">
+                  <div class="flex items-center gap-1.5 text-[12px] font-medium text-outline">
+                    <span class="material-symbols-outlined text-[16px] text-primary" data-icon="calendar_month">calendar_month</span>
+                    <span>${ev.date}</span>
+                    <span>•</span>
+                    <span class="material-symbols-outlined text-[16px] text-outline" data-icon="schedule">schedule</span>
+                    <span>${ev.time}</span>
+                  </div>
+
+                  <h3 class="font-headline-sm text-headline-sm font-bold text-on-surface line-clamp-1 group-hover:text-primary transition-colors cursor-pointer" onclick="app.openEventDetailsModal('${ev.id}')">
+                    ${ev.title}
+                  </h3>
+
+                  <p class="font-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+                    ${ev.description}
+                  </p>
+                </div>
+
+                <!-- Venue & Organizer Meta -->
+                <div class="pt-2 border-t border-outline-variant/50 space-y-3">
+                  <div class="flex items-center justify-between text-[12px] text-on-surface-variant">
+                    <div class="flex items-center gap-1.5 truncate max-w-[65%]">
+                      <span class="material-symbols-outlined text-[16px] text-outline flex-shrink-0" data-icon="location_on">location_on</span>
+                      <span class="truncate">${ev.venue}</span>
+                    </div>
+                    <div class="text-right truncate font-medium text-outline">
+                      By ${organizer.name}
+                    </div>
+                  </div>
+
+                  <!-- Capacity Indicator -->
+                  <div class="space-y-1">
+                    <div class="flex justify-between items-center text-[11px] font-mono">
+                      <span class="text-outline">${ev.registeredCount} / ${ev.capacity} Registered</span>
+                      <span class="font-bold ${remainingSeats <= 10 ? 'text-amber-600' : 'text-primary'}">${remainingSeats} seats left</span>
+                    </div>
+                    <div class="w-full bg-outline-variant/40 rounded-full h-1.5 overflow-hidden">
+                      <div class="bg-primary-container h-full rounded-full" style="width: ${fillPercentage}%;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Actions Strip -->
+                <div class="pt-2 flex items-center justify-between gap-3">
+                  <button onclick="app.openEventDetailsModal('${ev.id}')" class="px-3 py-2 rounded-lg border border-outline-variant hover:bg-surface-container text-on-surface font-label-md font-semibold transition-colors">
+                    Details
+                  </button>
+
+                  <div>
+                    ${isUserRegistered ? `
+                      <button onclick="app.cancelRegistrationForEvent('${ev.id}')" class="px-4 py-2 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 font-label-md font-semibold inline-flex items-center gap-1.5 hover:bg-emerald-100 transition-all">
+                        <span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+                        Registered
+                      </button>
+                    ` : remainingSeats <= 0 ? `
+                      <button disabled class="px-4 py-2 rounded-lg bg-slate-100 text-slate-400 font-label-md font-semibold cursor-not-allowed">
+                        Fully Booked
+                      </button>
+                    ` : `
+                      <button onclick="app.registerForEvent('${ev.id}')" class="px-4 py-2 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md font-semibold shadow-sm active:scale-95 transition-all">
+                        Register Now
+                      </button>
+                    `}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      resetFilters() {
+        this.selectedCategory = "All";
+        this.selectedStatusFilter = "all";
+        this.searchQuery = "";
+        document.getElementById('navGlobalSearch').value = "";
+        this.renderCategoryChips();
+        this.filterStatus('all');
+        this.renderExploreView();
+      },
+
+      // VIEW B: EVENT DETAILS MODAL
+      openEventDetailsModal(eventId) {
+        const ev = this.events.find(e => e.id === eventId);
+        if (!ev) return;
+        this.currentInspectionEventId = eventId;
+
+        const organizer = this.users.find(u => u.id === ev.organizer_id) || { name: "University Event Board" };
+        const isUserRegistered = this.registrations.some(r => r.user_id === this.currentUser.id && r.event_id === ev.id && r.status === 'confirmed');
+        const remainingSeats = ev.capacity - ev.registeredCount;
+        const fillPercentage = Math.min(100, Math.round((ev.registeredCount / ev.capacity) * 100));
+
+        document.getElementById('modalEventTitle').innerText = ev.title;
+        document.getElementById('modalEventCategoryBadge').innerText = ev.category;
+        document.getElementById('modalEventStatusBadge').innerText = remainingSeats > 0 ? "Open for RSVP" : "Sold Out";
+        document.getElementById('modalEventDateTime').innerText = `${ev.date} • ${ev.time}`;
+        document.getElementById('modalEventVenue').innerText = ev.venue;
+        document.getElementById('modalEventOrganizer').innerText = organizer.name;
+        document.getElementById('modalEventDescription').innerText = ev.description;
+        document.getElementById('modalEventSeatNumbers').innerText = `${ev.registeredCount} / ${ev.capacity} Seats Taken`;
+        document.getElementById('modalEventSeatRemaining').innerText = `${remainingSeats} Seats remaining for registration`;
+        document.getElementById('modalEventProgressBar').style.width = `${fillPercentage}%`;
+
+        const actionSlot = document.getElementById('modalActionSlot');
+        if (isUserRegistered) {
+          actionSlot.innerHTML = `
+            <button onclick="app.cancelRegistrationForEvent('${ev.id}'); app.closeModal('eventDetailsModal');" class="px-5 py-2.5 rounded-lg bg-red-50 text-error border border-red-200 font-label-lg font-semibold hover:bg-red-100 transition-colors">
+              Cancel My Pass
+            </button>
+          `;
+        } else if (remainingSeats <= 0) {
+          actionSlot.innerHTML = `
+            <button disabled class="px-5 py-2.5 rounded-lg bg-slate-100 text-slate-400 font-label-lg font-semibold cursor-not-allowed">
+              Waitlist Only (Full)
+            </button>
+          `;
+        } else {
+          actionSlot.innerHTML = `
+            <button onclick="app.registerForEvent('${ev.id}'); app.closeModal('eventDetailsModal');" class="px-6 py-2.5 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg font-semibold shadow-md active:scale-95 transition-all">
+              Confirm Registration (Free)
+            </button>
+          `;
+        }
+
+        document.getElementById('eventDetailsModal').classList.remove('hidden');
+      },
+
+      // VIEW C: MY REGISTRATIONS RENDERING
+      renderRegistrationsView() {
+        const userRegs = this.registrations.filter(r => r.user_id === this.currentUser.id);
+        const activeRegs = userRegs.filter(r => r.status === 'confirmed');
+        const cancelledRegs = userRegs.filter(r => r.status === 'cancelled');
+
+        document.getElementById('statUserTotalRegs').innerText = activeRegs.length;
+        document.getElementById('statUserUpcoming').innerText = activeRegs.length;
+        document.getElementById('statUserCancelled').innerText = cancelledRegs.length;
+
+        const listContainer = document.getElementById('userRegistrationsList');
+
+        if (userRegs.length === 0) {
+          listContainer.innerHTML = `
+            <div class="p-12 text-center bg-surface-container-lowest rounded-2xl border border-outline-variant space-y-4">
+              <span class="material-symbols-outlined text-[48px] text-outline" data-icon="confirmation_number">confirmation_number</span>
+              <h3 class="font-headline-sm font-bold text-on-surface">No Registrations Yet</h3>
+              <p class="font-body-md text-on-surface-variant max-w-md mx-auto">
+                You haven't reserved a seat for any upcoming seminars or summits. Browse the public catalog to secure your pass.
+              </p>
+              <button onclick="app.navigate('explore')" class="px-5 py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg font-semibold">
+                Explore Events Catalog
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        listContainer.innerHTML = userRegs.map(reg => {
+          const ev = this.events.find(e => e.id === reg.event_id) || {
+            title: "Archived Event",
+            date: "TBD",
+            venue: "TBD",
+            category: "General"
+          };
+          const organizer = this.users.find(u => u.id === ev.organizer_id) || { name: "University Event Board" };
+          const isCancelled = reg.status === 'cancelled';
+
+          return `
+            <div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant hover:border-primary-container/40 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-surface-container text-primary flex items-center justify-center flex-shrink-0 font-bold">
+                  <span class="material-symbols-outlined text-[24px]" data-icon="event_available">event_available</span>
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface-container text-primary">${ev.category}</span>
+                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold ${isCancelled ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-800'}">
+                      ${isCancelled ? 'CANCELLED' : 'CONFIRMED PASS'}
+                    </span>
+                  </div>
+                  <h4 class="font-headline-sm text-[18px] font-bold text-on-surface cursor-pointer hover:text-primary transition-colors" onclick="app.openEventDetailsModal('${ev.id}')">
+                    ${ev.title}
+                  </h4>
+                  <div class="flex flex-wrap items-center gap-3 text-body-sm text-outline">
+                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="calendar_month">calendar_month</span> ${ev.date}</span>
+                    <span>•</span>
+                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> ${ev.venue}</span>
+                    <span>•</span>
+                    <span>Organized by ${organizer.name}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 self-end md:self-center">
+                <button onclick="app.openEventDetailsModal('${ev.id}')" class="px-3.5 py-2 rounded-lg border border-outline-variant hover:bg-surface-container text-on-surface font-label-md font-semibold transition-colors">
+                  View Pass
+                </button>
+                ${!isCancelled ? `
+                  <button onclick="app.cancelRegistrationForEvent('${ev.id}')" class="px-3.5 py-2 rounded-lg border border-red-200 text-error hover:bg-red-50 font-label-md font-semibold transition-colors">
+                    Cancel Pass
+                  </button>
+                ` : `
+                  <button onclick="app.registerForEvent('${ev.id}')" class="px-3.5 py-2 rounded-lg bg-primary-container text-on-primary font-label-md font-semibold transition-colors">
+                    Re-Register
+                  </button>
+                `}
+              </div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      setRegTab(tab) {
+        ['all', 'upcoming', 'confirmed'].forEach(t => {
+          const btn = document.getElementById(`regTab-${t}`);
+          if (btn) {
+            if (t === tab) {
+              btn.className = "pb-3 text-label-lg font-semibold text-primary border-b-2 border-primary";
+            } else {
+              btn.className = "pb-3 text-label-lg font-medium text-on-surface-variant hover:text-on-surface";
+            }
+          }
+        });
+      },
+
+      // VIEW D: ORGANIZER DASHBOARD RENDERING
+      renderDashboardView() {
+        const totalEvents = this.events.length;
+        const activeEvents = this.events.filter(e => (e.capacity - e.registeredCount) > 0).length;
+        const totalRegs = this.events.reduce((acc, curr) => acc + curr.registeredCount, 0);
+        const totalAvail = this.events.reduce((acc, curr) => acc + (curr.capacity - curr.registeredCount), 0);
+
+        document.getElementById('metricTotalEvents').innerText = totalEvents;
+        document.getElementById('metricActiveEvents').innerText = activeEvents;
+        document.getElementById('metricTotalRegs').innerText = totalRegs;
+        document.getElementById('metricAvailSeats').innerText = totalAvail;
+
+        // Render live audit feed
+        const feed = document.getElementById('dashboardLiveFeed');
+        const mockAudit = [
+          { icon: "person_add", text: "Abhay registered for Cybersecurity Summit", time: "Just now", color: "text-emerald-600" },
+          { icon: "person_add", text: "Rahul registered for Hackathon 2025", time: "14m ago", color: "text-emerald-600" },
+          { icon: "edit", text: "Admin Organizer updated capacity on Cloud Native", time: "1h ago", color: "text-primary" },
+          { icon: "person_remove", text: "Priya cancelled registration for Tech Career Expo", time: "2h ago", color: "text-amber-600" },
+          { icon: "add_circle", text: "Event Manager created Generative AI Bootcamp", time: "5h ago", color: "text-secondary" }
+        ];
+
+        feed.innerHTML = mockAudit.map(item => `
+          <div class="flex items-start gap-3 p-2.5 rounded-lg hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined text-[18px] ${item.color} mt-0.5" data-icon="${item.icon}">${item.icon}</span>
+            <div class="flex-1">
+              <div class="text-on-surface font-medium">${item.text}</div>
+              <div class="text-[11px] text-outline">${item.time}</div>
+            </div>
+          </div>
+        `).join('');
+      },
+
+      // VIEW E: MANAGE EVENTS TABLE & CRUD
+      filterManageSearch(val) {
+        this.manageSearchQuery = val.toLowerCase().trim();
+        this.renderManageView();
+      },
+
+      filterManageCategory(cat) {
+        this.manageCategoryFilter = cat;
+        this.renderManageView();
+      },
+
+      renderManageView() {
+        const tbody = document.getElementById('manageEventsTableBody');
+        
+        let filtered = this.events.filter(ev => {
+          const matchCat = this.manageCategoryFilter === 'All' || ev.category === this.manageCategoryFilter;
+          const matchSearch = !this.manageSearchQuery || 
+            ev.title.toLowerCase().includes(this.manageSearchQuery) ||
+            ev.venue.toLowerCase().includes(this.manageSearchQuery);
+          return matchCat && matchSearch;
+        });
+
+        document.getElementById('manageEventCountLabel').innerText = `${filtered.length} Events in system`;
+
+        tbody.innerHTML = filtered.map(ev => {
+          const remaining = ev.capacity - ev.registeredCount;
+          const isOwner = this.currentUser.id === ev.organizer_id;
+          const fillPercentage = Math.min(100, Math.round((ev.registeredCount / ev.capacity) * 100));
+
+          return `
+            <tr class="hover:bg-surface-container-low/60 transition-colors">
+              <td class="py-3.5 px-4">
+                <div class="font-semibold text-on-surface hover:text-primary cursor-pointer" onclick="app.openAttendeeDrawer('${ev.id}')">${ev.title}</div>
+                <div class="flex items-center gap-2 text-[12px] text-outline">
+                  <span>${ev.category}</span>
+                  <span>•</span>
+                  <span>Owner: ${ev.organizer_id === this.currentUser.id ? 'You' : 'Other Organizer'}</span>
+                </div>
+              </td>
+              <td class="py-3.5 px-4 text-on-surface-variant font-mono text-[12px]">
+                ${ev.date}
+                <div class="text-[11px] text-outline">${ev.time}</div>
+              </td>
+              <td class="py-3.5 px-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-24 bg-outline-variant/40 rounded-full h-2 overflow-hidden">
+                    <div class="bg-primary-container h-full rounded-full" style="width: ${fillPercentage}%;"></div>
+                  </div>
+                  <span class="font-mono text-[12px] font-semibold">${ev.registeredCount} / ${ev.capacity}</span>
+                </div>
+              </td>
+              <td class="py-3.5 px-4 font-mono text-[13px] ${remaining <= 10 ? 'text-amber-600 font-bold' : 'text-on-surface'}">
+                ${remaining} seats
+              </td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold ${remaining > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+                  ${remaining > 0 ? 'ACTIVE' : 'SOLD OUT'}
+                </span>
+              </td>
+              <td class="py-3.5 px-4 text-right">
+                <div class="flex items-center justify-end gap-1.5">
+                  <button 
+                    onclick="app.openAttendeeDrawer('${ev.id}')" 
+                    title="View Attendees (API: GET /api/events/{id}/registrations)"
+                    class="p-1.5 rounded-md hover:bg-surface-container text-primary hover:text-primary-container transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-[18px]" data-icon="groups">groups</span>
+                  </button>
+                  <button 
+                    onclick="app.openEditEventModal('${ev.id}')" 
+                    title="Edit Event"
+                    class="p-1.5 rounded-md hover:bg-surface-container text-outline hover:text-on-surface transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+                  </button>
+                  <button 
+                    onclick="app.deleteEvent('${ev.id}')" 
+                    title="Delete Event"
+                    class="p-1.5 rounded-md hover:bg-red-50 text-outline hover:text-error transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      },
+
+      // ATTENDEE DRAWER (CONTRACT CHECK: ONLY OWNING ORGANIZER CAN VIEW PRIVATE LIST)
+      openAttendeeDrawer(eventId) {
+        const ev = this.events.find(e => e.id === eventId);
+        if (!ev) return;
+
+        // API CONTRACT ENFORCEMENT:
+        // /api/events/{id}/registrations -> Attendee list, owning organizer only.
+        if (this.currentUser.role !== 'organizer') {
+          this.showToast("403 Forbidden: Only registered organizers can view attendee rosters.", "error");
+          return;
+        }
+
+        if (this.currentUser.id !== ev.organizer_id) {
+          this.showToast(`Access Restricted: You are not the owning organizer of '${ev.title}'. Ownership rests with ${ev.organizer_id}.`, "error");
+          return;
+        }
+
+        this.currentInspectionEventId = eventId;
+        const owner = this.users.find(u => u.id === ev.organizer_id) || { name: "Current User" };
+        const eventRegs = this.registrations.filter(r => r.event_id === eventId && r.status === 'confirmed');
+
+        document.getElementById('drawerEventTitle').innerText = ev.title;
+        document.getElementById('drawerTotalAttendees').innerText = eventRegs.length;
+        document.getElementById('drawerRemainingCapacity').innerText = ev.capacity - ev.registeredCount;
+        document.getElementById('drawerOwnerName').innerText = `${owner.name} (You)`;
+
+        this.renderAttendeeRosterTable(eventRegs);
+        document.getElementById('attendeeDrawerModal').classList.remove('hidden');
+      },
+
+      renderAttendeeRosterTable(roster) {
+        const tbody = document.getElementById('drawerAttendeeTableBody');
+        if (roster.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="4" class="py-8 text-center text-outline">
+                No students currently registered for this session.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = roster.map(reg => {
+          const student = this.users.find(u => u.id === reg.user_id) || { name: "Student Attendee", email: "student@campus.edu" };
+          return `
+            <tr class="hover:bg-surface-container-low transition-colors">
+              <td class="py-2.5 px-4 font-semibold text-on-surface flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-primary-container text-on-primary text-[10px] flex items-center justify-center font-bold">
+                  ${student.name.substring(0, 2).toUpperCase()}
+                </div>
+                <span>${student.name}</span>
+              </td>
+              <td class="py-2.5 px-4 font-mono text-[12px] text-on-surface-variant">${student.email}</td>
+              <td class="py-2.5 px-4 font-mono text-[12px] text-outline">${new Date(reg.created_at).toLocaleDateString()}</td>
+              <td class="py-2.5 px-4">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">CONFIRMED</span>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      },
+
+      filterAttendeeRoster(query) {
+        const q = query.toLowerCase().trim();
+        const evRegs = this.registrations.filter(r => r.event_id === this.currentInspectionEventId && r.status === 'confirmed');
+        const filtered = evRegs.filter(reg => {
+          const student = this.users.find(u => u.id === reg.user_id) || { name: "", email: "" };
+          return student.name.toLowerCase().includes(q) || student.email.toLowerCase().includes(q);
+        });
+        this.renderAttendeeRosterTable(filtered);
+      },
+
+      exportEventAttendeesCSV() {
+        const ev = this.events.find(e => e.id === this.currentInspectionEventId);
+        if (!ev) return;
+        const roster = this.registrations.filter(r => r.event_id === ev.id && r.status === 'confirmed');
+        let csvContent = "data:text/csv;charset=utf-8,Student Name,Email,Registration Date,Status\n";
+        roster.forEach(r => {
+          const u = this.users.find(user => user.id === r.user_id) || { name: "Student", email: "student@edu" };
+          csvContent += `"${u.name}","${u.email}","${r.created_at}","${r.status}"\n`;
+        });
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `attendees_${ev.id}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.showToast(`Exported ${roster.length} attendee records to CSV`, "success");
+      },
+
+      exportAllEventsCSV() {
+        let csvContent = "data:text/csv;charset=utf-8,Event Title,Category,Capacity,Registered,Venue,Date\n";
+        this.events.forEach(e => {
+          csvContent += `"${e.title}","${e.category}",${e.capacity},${e.registeredCount},"${e.venue}","${e.date}"\n`;
+        });
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `eventhub_events_manifest.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        this.showToast("Exported full events manifest to CSV", "success");
+      },
+
+      // CREATE & EDIT EVENT MODAL HANDLERS
+      openCreateEventModal() {
+        document.getElementById('createEventForm').reset();
+        document.getElementById('formEventId').value = "";
+        document.getElementById('eventFormModalTitle').innerText = "Create New Event";
+        document.getElementById('createEventModal').classList.remove('hidden');
+      },
+
+      openEditEventModal(eventId) {
+        const ev = this.events.find(e => e.id === eventId);
+        if (!ev) return;
+
+        document.getElementById('formEventId').value = ev.id;
+        document.getElementById('formTitle').value = ev.title;
+        document.getElementById('formCategory').value = ev.category;
+        document.getElementById('formCapacity').value = ev.capacity;
+        document.getElementById('formDate').value = ev.date;
+        document.getElementById('formTime').value = ev.time;
+        document.getElementById('formVenue').value = ev.venue;
+        document.getElementById('formDescription').value = ev.description;
+        document.getElementById('eventFormModalTitle').innerText = "Edit Event Details";
+        document.getElementById('createEventModal').classList.remove('hidden');
+      },
+
+      handleSaveEvent(e) {
+        e.preventDefault();
+        const id = document.getElementById('formEventId').value;
+        const title = document.getElementById('formTitle').value;
+        const category = document.getElementById('formCategory').value;
+        const capacity = parseInt(document.getElementById('formCapacity').value, 10);
+        const date = document.getElementById('formDate').value;
+        const time = document.getElementById('formTime').value;
+        const venue = document.getElementById('formVenue').value;
+        const description = document.getElementById('formDescription').value;
+
+        if (id) {
+          // Update existing
+          const existing = this.events.find(ev => ev.id === id);
+          if (existing) {
+            existing.title = title;
+            existing.category = category;
+            existing.capacity = Math.max(capacity, existing.registeredCount);
+            existing.date = date;
+            existing.time = time;
+            existing.venue = venue;
+            existing.description = description;
+            this.showToast(`Event '${title}' updated successfully`, "success");
+          }
+        } else {
+          // Create new
+          const newEvent = {
+            id: "e" + (Date.now()),
+            organizer_id: this.currentUser.id,
+            title,
+            category,
+            capacity,
+            date,
+            time,
+            venue,
+            description,
+            status: "open",
+            registeredCount: 0
+          };
+          this.events.unshift(newEvent);
+          this.showToast(`New event '${title}' published live to catalog`, "success");
+        }
+
+        this.closeModal('createEventModal');
+        this.renderExploreView();
+        this.renderDashboardView();
+        this.renderManageView();
+      },
+
+      deleteEvent(eventId) {
+        const ev = this.events.find(e => e.id === eventId);
+        if (!ev) return;
+
+        if (confirm(`Are you sure you want to delete '${ev.title}'? This will revoke all student passes.`)) {
+          this.events = this.events.filter(e => e.id !== eventId);
+          this.registrations = this.registrations.filter(r => r.event_id !== eventId);
+          this.showToast(`Event '${ev.title}' permanently removed`, "info");
+          this.renderExploreView();
+          this.renderDashboardView();
+          this.renderManageView();
+        }
+      },
+
+      // REGISTRATION ACTIONS (REST API CONTRACT EXECUTION)
+      registerForEvent(eventId) {
+        const ev = this.events.find(e => e.id === eventId);
+        if (!ev) return;
+
+        // Check if full
+        if (ev.registeredCount >= ev.capacity) {
+          this.showToast("Registration failed: Event is at maximum capacity (409 Conflict)", "error");
+          return;
+        }
+
+        // Check existing registration
+        const existing = this.registrations.find(r => r.user_id === this.currentUser.id && r.event_id === eventId);
+        if (existing && existing.status === 'confirmed') {
+          this.showToast("You are already registered for this event (409 Conflict).", "info");
+          return;
+        }
+
+        if (existing) {
+          existing.status = 'confirmed';
+          existing.created_at = new Date().toISOString();
+        } else {
+          this.registrations.push({
+            id: "r" + (Date.now()),
+            user_id: this.currentUser.id,
+            event_id: eventId,
+            created_at: new Date().toISOString(),
+            status: "confirmed"
+          });
+        }
+
+        ev.registeredCount += 1;
+        this.showToast(`201 Created: Registration pass confirmed for '${ev.title}'!`, "success");
+
+        this.renderExploreView();
+        this.renderRegistrationsView();
+        this.renderDashboardView();
+        this.renderManageView();
+      },
+
+      cancelRegistrationForEvent(eventId) {
+        const ev = this.events.find(e => e.id === eventId);
+        if (!ev) return;
+
+        const reg = this.registrations.find(r => r.user_id === this.currentUser.id && r.event_id === eventId && r.status === 'confirmed');
+        if (!reg) return;
+
+        if (confirm(`Cancel your confirmed seat for '${ev.title}' and release pass to the public waitlist?`)) {
+          reg.status = 'cancelled';
+          ev.registeredCount = Math.max(0, ev.registeredCount - 1);
+          this.showToast(`Pass for '${ev.title}' cancelled. Seat restocked into general pool.`, "info");
+
+          this.renderExploreView();
+          this.renderRegistrationsView();
+          this.renderDashboardView();
+          this.renderManageView();
+        }
+      },
+
+      // MODAL HELPERS
+      closeModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+      },
+
+      openApiContractModal() {
+        document.getElementById('apiContractModal').classList.remove('hidden');
+      },
+
+      // TOAST NOTIFICATIONS
+      showToast(message, type = 'info') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        
+        let bgStyle = 'bg-surface-container-lowest border-outline-variant text-on-surface';
+        let iconName = 'info';
+        let iconColor = 'text-primary';
+
+        if (type === 'success') {
+          bgStyle = 'bg-emerald-50 border-emerald-200 text-emerald-950';
+          iconName = 'check_circle';
+          iconColor = 'text-emerald-600';
+        } else if (type === 'error') {
+          bgStyle = 'bg-red-50 border-red-200 text-red-950';
+          iconName = 'error';
+          iconColor = 'text-error';
+        }
+
+        toast.className = `p-3.5 rounded-xl border shadow-xl flex items-center gap-3 text-body-sm font-medium transition-all duration-300 pointer-events-auto transform translate-y-4 opacity-0 ${bgStyle}`;
+        toast.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] ${iconColor}" data-icon="${iconName}">${iconName}</span>
+          <span class="flex-1">${message}</span>
+        `;
+
+        container.appendChild(toast);
+
+        // Animate in
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+
+        // Remove after 4s
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-x-4');
+          setTimeout(() => toast.remove(), 300);
+        }, 4000);
+      }
+    };
+
+    // Initialize application on DOM ready
+    document.addEventListener("DOMContentLoaded", () => {
+      app.init();
+    });
+  </script>
+</body></html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventHub - My Registrations</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed-variant": "#7f2b00",
+            "on-secondary-container": "#fffbff",
+            "surface-tint": "#4d44e3",
+            "error-container": "#ffdad6",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-high": "#e2e7ff",
+            "outline-variant": "#c7c4d8",
+            "on-secondary-fixed-variant": "#5a00c6",
+            "inverse-primary": "#c3c0ff",
+            "tertiary-fixed-dim": "#ffb599",
+            "error": "#ba1a1a",
+            "surface": "#faf8ff",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#464555",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed": "#370e00",
+            "primary-fixed": "#e2dfff",
+            "on-background": "#131b2e",
+            "tertiary-fixed": "#ffdbce",
+            "on-primary-container": "#dad7ff",
+            "primary-fixed-dim": "#c3c0ff",
+            "surface-container": "#eaedff",
+            "on-secondary-fixed": "#25005a",
+            "inverse-surface": "#283044",
+            "inverse-on-surface": "#eef0ff",
+            "on-surface": "#131b2e",
+            "on-primary-fixed-variant": "#3323cc",
+            "tertiary-container": "#aa3b00",
+            "on-tertiary-container": "#ffd1c1",
+            "surface-container-highest": "#dae2fd",
+            "on-primary": "#ffffff",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#eaddff",
+            "surface-dim": "#d2d9f4",
+            "primary": "#3525cd",
+            "surface-variant": "#dae2fd",
+            "secondary": "#712ae2",
+            "on-primary-fixed": "#0f0069",
+            "secondary-fixed-dim": "#d2bbff",
+            "background": "#faf8ff",
+            "tertiary": "#822c00",
+            "primary-container": "#4f46e5",
+            "surface-bright": "#faf8ff",
+            "secondary-container": "#8a4cfc",
+            "outline": "#777587",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "margin-tablet": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2.5rem",
+            "space-md": "1rem",
+            "margin": "2rem",
+            "gutter-lg": "2rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Inter"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Inter"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "mono-metric": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "800" }],
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "mono-metric": ["13px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-container selection:text-white">
+<!-- REST API State Bar -->
+<aside class="bg-inverse-surface text-inverse-on-surface py-2 px-margin text-center border-b border-outline-variant/20">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between font-mono-metric text-mono-metric">
+<div class="flex items-center gap-2">
+<span class="inline-flex w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="text-inverse-primary font-medium">REST API Architecture:</span>
+<span class="text-white/90">Connected to GET /api/me/registrations • Current User: Abhay (Student)</span>
+</div>
+<div class="hidden sm:flex items-center gap-4 text-xs text-outline-variant">
+<span>Latency: 28ms</span>
+<span>•</span>
+<span>Cache: fresh-stale</span>
+</div>
+</div>
+</aside>
+<!-- TopNavBar from Shared Components JSON -->
+<header class="docked full-width top-0 sticky z-40 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none">
+<div class="w-full max-w-[1440px] mx-auto px-margin flex items-center justify-between h-16">
+<!-- Brand & Search cluster -->
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-primary-container flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-xl" data-icon="confirmation_number">confirmation_number</span>
+</div>
+<a class="font-headline-md text-headline-md font-bold tracking-tight text-primary dark:text-inverse-primary" href="#">EventHub</a>
+</div>
+<!-- Search Bar on left -->
+<div class="hidden lg:flex items-center relative w-72">
+<span class="material-symbols-outlined absolute left-3 text-outline text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 bg-surface-container-low border border-outline-variant/50 rounded-lg text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all" placeholder="Search events, workshops..." type="text"/>
+</div>
+</div>
+<!-- Navigation links (Semantic Shell Active Logic: 'My Registrations' matched & active) -->
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-on-surface dark:hover:text-inverse-on-surface py-4 transition-colors font-label-lg text-label-lg" href="#">Explore Events</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-semibold py-4 font-label-lg text-label-lg" href="#">My Registrations</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-on-surface dark:hover:text-inverse-on-surface py-4 transition-colors font-label-lg text-label-lg" href="#">Organizer Dashboard</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-medium hover:text-on-surface dark:hover:text-inverse-on-surface py-4 transition-colors font-label-lg text-label-lg" href="#">Manage Events</a>
+</nav>
+<!-- Trailing actions cluster -->
+<div class="flex items-center gap-3">
+<!-- Icons -->
+<button aria-label="Notifications" class="p-2 text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-variant rounded-full transition-colors active:scale-[0.98] duration-150">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Help" class="p-2 text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-variant rounded-full transition-colors active:scale-[0.98] duration-150">
+<span class="material-symbols-outlined text-xl" data-icon="help_outline">help_outline</span>
+</button>
+<!-- Primary Action -->
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-primary-container hover:bg-primary text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined text-base" data-icon="add">add</span>
+<span>Create Event</span>
+</button>
+<!-- Profile Switcher Dropdown (Demo Switcher) -->
+<div class="relative group ml-1">
+<button class="flex items-center gap-2 pl-2 pr-3 py-1 bg-surface-container-low hover:bg-surface-container border border-outline-variant/60 rounded-full transition-colors active:scale-[0.98]">
+<img alt="Current Active User Profile Avatar" class="w-7 h-7 rounded-full object-cover border border-primary/20" data-alt="A sophisticated professional portrait of Abhay, a confident computer engineering university student, smiling naturally indoors in a bright modern tech innovation laboratory with subtle soft neon ambient illumination and glass architectural partitions in light indigo tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs6yzo5tKKU3X9OQwCBgvZgHDaFHiIs9yRl9uEylCJa-iYhKmFJUCyLAml-a1vaBUITwCfMjB9vk5dmllDR3Wx5dF-d9_shqXpmD-duejjnc917_z0Dynw3w1eYkPaq0QM6of7zdwuEkIZJ8DTMvT3EikD0owjVKnKpQPHmPD84i3ExU6-e9QAZdGkHhTqH8xEr4wM_6cJXoQchA7TKdQzGaFEhxtDSpevykBIVh4S"/>
+<div class="text-left hidden xl:block">
+<p class="font-label-sm text-label-sm font-semibold text-on-surface leading-tight">Abhay (Student)</p>
+<p class="font-mono-metric text-[10px] text-outline leading-none">DEMO USER</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-base ml-0.5" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<!-- Dropdown Menu -->
+<div class="absolute right-0 mt-2 w-56 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg py-2 hidden group-hover:block hover:block z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+<div class="px-3 py-1.5 border-b border-outline-variant/40 mb-1">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Demo Profile Switcher</span>
+</div>
+<a class="flex items-center justify-between px-3 py-2 bg-primary-fixed/30 text-primary font-label-md text-label-md font-semibold" href="#">
+<span>Abhay (Student)</span>
+<span class="material-symbols-outlined text-base text-primary" data-icon="check">check</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#">
+<span>Rahul (Graduate)</span>
+<span class="text-xs text-outline font-normal">2 Events</span>
+</a>
+<a class="flex items-center justify-between px-3 py-2 text-on-surface hover:bg-surface-container font-label-md text-label-md" href="#">
+<span>Priya (Faculty)</span>
+<span class="text-xs text-outline font-normal">4 Events</span>
+</a>
+<div class="border-t border-outline-variant/40 my-1"></div>
+<a class="flex items-center justify-between px-3 py-2 text-secondary hover:bg-surface-container font-label-md text-label-md" href="#">
+<span>Admin Organizer</span>
+<span class="material-symbols-outlined text-base" data-icon="shield">shield</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Notification Toast Demo (Supabase / REST Realtime Seat Release Notification) -->
+<div class="max-w-[1440px] mx-auto px-margin pt-4 w-full">
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded-xl p-3 shadow-sm flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg" data-icon="sync">sync</span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+<strong class="text-on-surface font-label-md">Realtime Data Synchronization:</strong> Cancellations automatically execute REST calls to <code class="bg-surface-container px-1.5 py-0.5 rounded text-primary text-xs font-mono">DELETE /api/registrations/:id</code>, immediately releasing 1 seat back to venue capacity.
+        </div>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+          Supabase Live
+        </span>
+<button class="text-outline hover:text-on-surface p-1 rounded-md">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Canvas -->
+<main class="w-full max-w-[1440px] mx-auto px-margin py-8 flex-1">
+<!-- Page Title & Header Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-outline-variant/40">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-fixed text-primary font-semibold">Student Portal</span>
+<span class="text-xs text-outline font-mono-metric">REST v2.4</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">My Registrations</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
+          Manage your enrolled tech summits, workshops, hackathons, and track registration statuses in real-time.
+        </p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md shadow-sm transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-base text-primary" data-icon="calendar_month">calendar_month</span>
+<span>Download Tickets/Calendar Sync</span>
+</a>
+<a class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container hover:bg-primary text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-base" data-icon="explore">explore</span>
+<span>Explore More Events</span>
+</a>
+</div>
+</div>
+<!-- Key Metrics Summary Cards -->
+<section class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+<!-- Card 1: Total Registrations -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-on-surface-variant">Total Registrations</span>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container text-on-surface-variant">All-time</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline-xl text-on-surface font-extrabold tracking-tight">5</span>
+<span class="font-mono-metric text-xs text-outline">records active</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-xs text-primary font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span>Verified Student Account</span>
+</div>
+</div>
+<!-- Card 2: Upcoming Events -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-on-surface-variant">Upcoming Events</span>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-fixed text-primary font-semibold">2 this month</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline-xl text-primary font-extrabold tracking-tight">3</span>
+<span class="font-mono-metric text-xs text-outline">actionable</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-xs text-emerald-700 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Next event in 12 days</span>
+</div>
+</div>
+<!-- Card 3: Completed Events -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-on-surface-variant">Completed Events</span>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">Attended</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline-xl text-on-surface font-extrabold tracking-tight">1</span>
+<span class="font-mono-metric text-xs text-outline">certificate issued</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-xs text-outline font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="military_tech">military_tech</span>
+<span>Credentials archived</span>
+</div>
+</div>
+<!-- Card 4: Cancelled Registrations -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-md text-label-md text-on-surface-variant">Cancelled Registrations</span>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-amber-50 text-amber-800 font-semibold border border-amber-200">Restocked</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-headline-xl text-on-surface font-extrabold tracking-tight">1</span>
+<span class="font-mono-metric text-xs text-outline">slot returned</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-xs text-amber-700 font-medium">
+<span class="material-symbols-outlined text-sm" data-icon="replay">replay</span>
+<span>Eligible for re-enrollment</span>
+</div>
+</div>
+</section>
+<!-- Filters, Search & View Controls Bar -->
+<div class="mt-8 bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Interactive Tabs -->
+<div class="flex items-center gap-1 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+<button class="px-3.5 py-1.5 bg-primary-container text-white rounded-lg font-label-md text-label-md font-semibold shrink-0 shadow-sm">
+          All Registrations (5)
+        </button>
+<button class="px-3.5 py-1.5 hover:bg-surface-container text-on-surface-variant rounded-lg font-label-md text-label-md shrink-0 transition-colors">
+          Upcoming (3)
+        </button>
+<button class="px-3.5 py-1.5 hover:bg-surface-container text-on-surface-variant rounded-lg font-label-md text-label-md shrink-0 transition-colors">
+          Completed (1)
+        </button>
+<button class="px-3.5 py-1.5 hover:bg-surface-container text-on-surface-variant rounded-lg font-label-md text-label-md shrink-0 transition-colors">
+          Cancelled (1)
+        </button>
+</div>
+<!-- Search and Sort Tools -->
+<div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+<div class="relative w-full sm:w-80">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-outline-variant/60 rounded-lg text-body-sm font-body-sm text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all placeholder:text-outline" placeholder="Search registered events by title, organizer, or venue..." type="text"/>
+</div>
+<div class="relative w-full sm:w-auto shrink-0">
+<select class="w-full sm:w-auto pl-3 pr-8 py-2 bg-surface-container-lowest border border-outline-variant/60 rounded-lg text-body-sm font-body-sm font-medium text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 appearance-none cursor-pointer">
+<option>Sort by: Event Date (Soonest first)</option>
+<option>Sort by: Recently Registered</option>
+<option>Sort by: Alphabetical</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-outline text-base pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Registered Events List / Cards Grid -->
+<section class="mt-6 space-y-4">
+<!-- Event 1: National Cybersecurity Summit 2025 -->
+<article class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-6 shadow-sm hover:border-primary/40 hover:shadow-md transition-all">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<!-- Left: Details & Thumb -->
+<div class="flex items-start gap-5">
+<div class="relative w-28 h-28 rounded-xl overflow-hidden shrink-0 border border-outline-variant/40 bg-surface-container">
+<img alt="Cybersecurity Summit Artwork" class="w-full h-full object-cover" data-alt="Futuristic cyber security operations control center with digital lock glyphs and glowing cobalt blue fiber optic lines, ultra-modern presentation stage with holographic projection in an executive conference arena bathed in high-tech architectural indigo ambient light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3GApkXu0GG_fyGx6VEB7zIacXckLKT2Qe3EgJaNxy5IEd9ycMMUufrjO5DxV5OQTU1W4fRGL3f5rbpgGzMF1cmDFo5OWGzq0EQnHjN31yehLNLW7KWbihS1Tbl4N-9HYp7_8OxfaSUUeqKaNmYVeuufVIgjTccvEQwwTM683soLnpA6j5ylmTaCz32GAG5ifPCG8cbhRYEfJsYLgfFsSlCronplyfyu38P5hSKAVD"/>
+<span class="absolute bottom-1.5 left-1.5 bg-black/60 backdrop-blur-sm text-white text-[10px] font-mono-metric px-1.5 py-0.5 rounded">HYBRID</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span>Confirmed / Active</span>
+</span>
+<span class="px-2 py-0.5 rounded-full text-xs font-mono-metric bg-surface-container text-on-surface-variant">Ticket #EH-94821</span>
+<span class="text-xs text-outline">•</span>
+<span class="text-xs text-outline font-body-sm">Registered on Oct 12, 2025</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+                National Cybersecurity Summit 2025
+              </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-4 pt-1 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary shrink-0" data-icon="calendar_today">calendar_today</span>
+<span>October 24, 2025 • 09:00 AM - 05:00 PM</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary shrink-0" data-icon="location_on">location_on</span>
+<span>Science Hall Auditorium &amp; Online</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline shrink-0" data-icon="business">business</span>
+<span>Organizer: <strong class="text-on-surface font-medium">Admin Organizer</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-emerald-600 shrink-0" data-icon="check_circle">check_circle</span>
+<span>Seat Reserved: Hall A, Row 4, Seat 12</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Actions Cluster -->
+<div class="flex flex-row lg:flex-col items-center lg:items-end justify-between gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-outline-variant/40">
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base text-primary" data-icon="info">info</span>
+<span>View Event Details</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-primary-container hover:bg-primary text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base" data-icon="qr_code">qr_code</span>
+<span>Download Pass / QR</span>
+</button>
+</div>
+<button class="inline-flex items-center gap-1 text-error hover:text-red-700 font-label-sm text-label-sm hover:underline py-1 transition-colors" onclick="document.getElementById('cancel-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
+<span>Cancel Registration</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Event 2: Generative AI & LLM Systems Bootcamp -->
+<article class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-6 shadow-sm hover:border-primary/40 hover:shadow-md transition-all">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<!-- Left: Details & Thumb -->
+<div class="flex items-start gap-5">
+<div class="relative w-28 h-28 rounded-xl overflow-hidden shrink-0 border border-outline-variant/40 bg-surface-container">
+<img alt="Generative AI Bootcamp Artwork" class="w-full h-full object-cover" data-alt="An expansive modern engineering university computing lab where college students collaborate around neural network node graphs on large curved monitors with gentle purple and violet task lighting in a high-clarity minimalist tech space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjk-U-Op95Xr8v8h6uiYR4pqsHga1aADzxBfCc0LhZk8uqriD80e-Vky2rbkODvFKg-GmQi84EJohAPYTy89anYeXGs2zqurnBXmdF0h-fE8z09LL5ckTwR7Ae_mkyNjuWZqtKRjgiAUlHEpuIIWX7HRKVoZE4a6Df1QI_DgAL_o1-miUdqCUxGPI7EEE9AnRKBQkTgWkL9LGT8KKU5QEuSzrTJSmeg1onoVK2rX_1"/>
+<span class="absolute bottom-1.5 left-1.5 bg-black/60 backdrop-blur-sm text-white text-[10px] font-mono-metric px-1.5 py-0.5 rounded">WORKSHOP</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span>Confirmed / Active</span>
+</span>
+<span class="px-2 py-0.5 rounded-full text-xs font-mono-metric bg-surface-container text-on-surface-variant">Ticket #EH-88312</span>
+<span class="text-xs text-outline">•</span>
+<span class="text-xs text-outline font-body-sm">Registered on Oct 14, 2025</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+                Generative AI &amp; LLM Systems Bootcamp
+              </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-4 pt-1 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary shrink-0" data-icon="calendar_today">calendar_today</span>
+<span>November 04, 2025 • 10:00 AM - 04:30 PM</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary shrink-0" data-icon="location_on">location_on</span>
+<span>Engineering Lab 402</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline shrink-0" data-icon="business">business</span>
+<span>Organizer: <strong class="text-on-surface font-medium">Admin Organizer</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-amber-600 shrink-0" data-icon="laptop_mac">laptop_mac</span>
+<span>Bring Laptop • Python Environment Required</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Actions Cluster -->
+<div class="flex flex-row lg:flex-col items-center lg:items-end justify-between gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-outline-variant/40">
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base text-primary" data-icon="info">info</span>
+<span>View Event Details</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-primary-container hover:bg-primary text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base" data-icon="qr_code">qr_code</span>
+<span>Download Pass / QR</span>
+</button>
+</div>
+<button class="inline-flex items-center gap-1 text-error hover:text-red-700 font-label-sm text-label-sm hover:underline py-1 transition-colors" onclick="document.getElementById('cancel-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
+<span>Cancel Registration</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Event 3: Full-Stack Hackathon 2025: 48-Hour Challenge -->
+<article class="bg-surface-container-lowest border border-outline-variant/70 rounded-xl p-6 shadow-sm hover:border-primary/40 hover:shadow-md transition-all">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<!-- Left: Details & Thumb -->
+<div class="flex items-start gap-5">
+<div class="relative w-28 h-28 rounded-xl overflow-hidden shrink-0 border border-outline-variant/40 bg-surface-container">
+<img alt="Full Stack Hackathon Artwork" class="w-full h-full object-cover" data-alt="Excited student hackathon teams working on software apps at modern communal oak desks under warm ambient ceiling pendants with whiteboards full of architecture diagrams in a dynamic technology incubator lounge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH1fRNTxCS2IZkAvt-uEzkhkckPgAbeHCF0kEpbeMA6dB9huIM2HYab_E_b-YsP01ePELyRhWKIH2LYC32r7E-YE3X6OuVlTRn79n-WSOAqPMrD9wOomlO6PpI0NPdNamCol9AAK8FEn_Z9Ejodg_xvpKlf3fBOIuLOW85h9-A2bgWRTGUal6pDP1ycu5UTKjvlU2ZnAb9N3jbyrluzFk8_-OGsA9Ydo05aIwgNcYS"/>
+<span class="absolute bottom-1.5 left-1.5 bg-orange-600/90 backdrop-blur-sm text-white text-[10px] font-mono-metric px-1.5 py-0.5 rounded">HACKATHON</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span>Confirmed / Active</span>
+</span>
+<span class="px-2 py-0.5 rounded-full text-xs font-mono-metric bg-surface-container text-on-surface-variant">Ticket #EH-61902</span>
+<span class="text-xs text-outline">•</span>
+<span class="text-xs text-outline font-body-sm">Registered on Oct 15, 2025</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+                Full-Stack Hackathon 2025: 48-Hour Challenge
+              </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-4 pt-1 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary shrink-0" data-icon="calendar_today">calendar_today</span>
+<span>November 15-17, 2025 • 06:00 PM Friday kickoff</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary shrink-0" data-icon="location_on">location_on</span>
+<span>Student Innovation Incubator Center</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline shrink-0" data-icon="business">business</span>
+<span>Organizer: <strong class="text-on-surface font-medium">Event Manager</strong></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary shrink-0" data-icon="group">group</span>
+<span>Team: 'ByteForge' (4 members confirmed)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Actions Cluster -->
+<div class="flex flex-row lg:flex-col items-center lg:items-end justify-between gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-outline-variant/40">
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base text-primary" data-icon="info">info</span>
+<span>View Event Details</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base" data-icon="groups">groups</span>
+<span>Team Workspace</span>
+</button>
+</div>
+<button class="inline-flex items-center gap-1 text-error hover:text-red-700 font-label-sm text-label-sm hover:underline py-1 transition-colors" onclick="document.getElementById('cancel-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
+<span>Cancel Registration</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Event 4: Cloud Native Architecture & Kubernetes (Cancelled) -->
+<article class="bg-surface-container-lowest/60 border border-outline-variant/50 rounded-xl p-6 shadow-sm opacity-90 hover:opacity-100 transition-opacity">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<!-- Left: Details & Thumb -->
+<div class="flex items-start gap-5">
+<div class="relative w-28 h-28 rounded-xl overflow-hidden shrink-0 border border-outline-variant/40 bg-surface-container grayscale contrast-75">
+<img alt="Cloud Native Architecture Artwork" class="w-full h-full object-cover" data-alt="A clean modern cloud computing server datacenter with orderly rows of server racks illuminated by soft cool ambient cyan LEDs in a pristine enterprise technological facility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA__zL5TrX2wMb7w8RDrqAkw7Krkl1lANk5HPAz_zXHtgLPtbbq1nW5oaHOdv6XtZgX6gIHjsoI3ssuO6CSFesJBXohaEURO1pU0AfESpaUPPXlRlObhnzXDEfoCdM9-Z8gwVxK05DOoRKXx4vHeGuacrheU2KEsGsjeIwT_xhGhdY65-Vled41fLHd_qXTBWO6Rf4tKleIwyddlanrkQ0kTccnplzGjZXJVl35x0I8"/>
+<span class="absolute bottom-1.5 left-1.5 bg-black/70 text-white text-[10px] font-mono-metric px-1.5 py-0.5 rounded">RELEASED</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-red-50 text-red-700 font-semibold border border-red-200">
+<span class="material-symbols-outlined text-xs" data-icon="block">block</span>
+<span>Registration Cancelled on Oct 10</span>
+</span>
+<span class="text-xs text-outline">•</span>
+<span class="text-xs text-outline font-body-sm">Seat returned to open inventory</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface/80 font-bold">
+                Cloud Native Architecture &amp; Kubernetes
+              </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1 gap-x-4 pt-1 text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline shrink-0" data-icon="calendar_today">calendar_today</span>
+<span>November 20, 2025</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-outline shrink-0" data-icon="location_on">location_on</span>
+<span>Virtual Lab &amp; Stream</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Actions Cluster -->
+<div class="flex flex-row lg:flex-col items-center lg:items-end justify-between gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-outline-variant/40">
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base text-outline" data-icon="info">info</span>
+<span>Details</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-primary-container hover:bg-primary text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-base" data-icon="add_circle">add_circle</span>
+<span>Re-register (Seats Available)</span>
+</button>
+</div>
+<span class="text-xs text-outline font-mono-metric">REST release ID: #REL-3891</span>
+</div>
+</div>
+</article>
+</section>
+<!-- Switcher / Empty State Guidance Note -->
+<div class="mt-8 bg-surface-container-low border border-outline-variant/60 rounded-xl p-5 flex items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl" data-icon="supervised_user_circle">supervised_user_circle</span>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg font-bold text-on-surface">Multi-Student Demo Sandbox Note</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Switch to Rahul or Priya via the profile switcher in the top right to view independent registration histories per user.
+          </p>
+</div>
+</div>
+<button class="px-3.5 py-1.5 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant rounded-lg font-label-sm text-label-sm font-semibold text-primary shrink-0 transition-colors">
+        Learn More
+      </button>
+</div>
+</main>
+<!-- Cancellation Modal (Dialog Demo) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" id="cancel-modal">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in zoom-in-95 duration-150">
+<div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl" data-icon="warning">warning</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-2">Cancel Registration?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+        Are you sure you want to cancel your registration? Through the EventHub REST API contract, this will immediately surrender your guaranteed seat and return 1 slot back to the public pool.
+      </p>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/50 text-xs font-mono mb-5 space-y-1">
+<div class="text-outline">ACTION: DELETE /api/registrations/:id</div>
+<div class="text-emerald-700 font-semibold">CAPACITY EVENT: increment_seat_available(+1)</div>
+</div>
+<div class="flex items-center justify-end gap-3">
+<button class="px-4 py-2 bg-surface-container-lowest hover:bg-surface-container border border-outline-variant rounded-lg font-label-md text-label-md font-semibold text-on-surface transition-colors" onclick="document.getElementById('cancel-modal').classList.add('hidden')">
+          Keep My Registration
+        </button>
+<button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-label-md text-label-md font-semibold shadow-sm transition-colors" onclick="document.getElementById('cancel-modal').classList.add('hidden')">
+          Confirm Cancellation
+        </button>
+</div>
+</div>
+</div>
+<!-- Footer from Shared Components JSON -->
+<footer class="docked full-width bottom bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline">
+<div class="w-full max-w-[1440px] mx-auto px-margin py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">EventHub</span>
+<span class="hidden sm:inline text-outline">•</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-outline-variant">
+          © 2025 EventHub Management System. All rights reserved. Powered by REST API Architecture.
+        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-6 font-label-md text-label-md">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">API Documentation</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">System Status</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#">Organizer Support</a>
+</div>
+</div>
+</footer>
+</body></html>

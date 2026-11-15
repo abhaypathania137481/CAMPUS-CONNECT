@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf8ff" />
+    <title>EventHub · Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/styles.css?v=4" />
+    <link rel="stylesheet" href="/assets/modal.css?v=4" />
+    <script src="/assets/app.js?v=4" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="EventHub home"><span class="brand-mark">E</span><span>EventHub</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-view="events" type="button">Explore events</button>
+        <button class="nav-link" data-view="mine" type="button">My registrations</button>
+      </nav>
+      <label class="profile-control"><span>Demo profile</span><select id="user-picker" aria-label="Select demo profile"><option value="">Loading profiles…</option></select></label>
+    </header>
+
+    <main class="shell">
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">EVENTHUB · COMMUNITY</p>
+          <h1 id="welcome-title">Find your next event.</h1>
+          <p class="subheading" id="welcome-copy">Browse events and save your seat.</p>
+        </div>
+        <div class="welcome-icon" aria-hidden="true">✳</div>
+      </section>
+
+      <section class="metrics" aria-label="Event summary">
+        <article class="metric-card"><div class="metric-label">Events available <span class="metric-icon purple">✦</span></div><strong id="event-count">—</strong><span class="metric-note">From your EventHub database</span></article>
+        <article class="metric-card"><div class="metric-label">Open for registration <span class="metric-icon green">↗</span></div><strong id="open-count">—</strong><span class="metric-note">Events accepting registrations</span></article>
+        <article class="metric-card"><div class="metric-label">Your registrations <span class="metric-icon orange">✓</span></div><strong id="mine-count">—</strong><span class="metric-note">For the selected profile</span></article>
+      </section>
+
+      <section class="panel" aria-labelledby="events-heading">
+        <div class="panel-head">
+          <div><p class="eyebrow" id="list-eyebrow">DISCOVER</p><h2 id="events-heading">Upcoming events</h2><p class="panel-description" id="list-copy">Explore the events currently in your database.</p></div>
+          <div class="toolbar">
+            <label class="search"><span aria-hidden="true">⌕</span><input id="event-search" type="search" placeholder="Search events" aria-label="Search events" /></label>
+            <select id="status-filter" class="filter" aria-label="Filter by registration status"><option value="all">All events</option><option value="open">Open</option><option value="closed">Closed</option></select>
+          </div>
+        </div>
+        <div id="event-grid" class="event-grid"><div class="empty">Loading events…</div></div>
+        <div class="panel-foot"><span id="result-count">Connecting to /api/events</span><button id="refresh" class="refresh" type="button"><span aria-hidden="true">↻</span> Refresh</button></div>
+      </section>
+      <p class="footnote">Demo profile selection follows the supplied EventHub design. Registration access is still controlled by your Supabase table grants and row-level security policies.</p>
+    </main>
+    <div id="event-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-card">
+        <button id="modal-close" class="modal-close" type="button" aria-label="Close event details">×</button>
+        <p class="eyebrow">EVENT DETAILS</p>
+        <div class="modal-title-row"><h2 id="modal-title"></h2><span id="modal-status" class="status-pill"></span></div>
+        <p id="modal-summary" class="modal-summary"></p>
+        <div class="modal-stats"><div><span>Seats remaining</span><strong id="modal-seats"></strong></div><div><span>Registered</span><strong id="modal-registered"></strong></div><div><span>Total capacity</span><strong id="modal-capacity"></strong></div></div>
+        <label class="modal-profile">Registering as<select id="modal-profile-picker" aria-label="Profile for this registration"></select></label>
+        <p class="modal-hint">Select your demo profile, then register. You can register for more than one event.</p>
+        <div class="modal-actions"><button id="modal-register" class="button primary" type="button">Register for event</button><button id="modal-unregister" class="button secondary hidden" type="button">Unregister</button></div>
+      </section>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
